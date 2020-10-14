@@ -1,0 +1,36 @@
+{
+  "name": "waiter_webapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^5.1.0",
+    "express-session": "^1.17.1",
+    "heroku": "^7.46.0",
+    "mocha": "^8.1.3",
+    "nodemon": "^2.0.5",
+    "pg": "^8.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ammaar345/waiter_webapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ammaar345/waiter_webapp/issues"
+  },
+  "homepage": "https://github.com/ammaar345/waiter_webapp#readme"
+}
