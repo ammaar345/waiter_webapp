@@ -10,26 +10,31 @@
 </head>
 
 <body>
-    <div class="col d-flex justify-content-center">
+    <div class="container border">
+    <div class="d-flex justify-content-center">
         <h1>Waiter Availability</h1>
     </div>
-    <div class="col d-flex justify-content-center p-4">
-   <label for="waiterName">Name: <input type="text" name="waiterName"> </label>
+    <div class="d-flex justify-content-center p-4">
+        <label for="waiterName">Name: <input type="text" name="waiterName"> </label>
     </div>
-    <div class="col d-flex justify-content-center">
-        <label for="mon" class="px-3">Monday<input type="checkbox" name="" id="" ></label>
-        <label for="tue" class="px-3">Tuesday<input type="checkbox" name="" id="" class=""></label>
-        <label for="wed" class="px-3">Wednesday<input type="checkbox" name="" id="" class=""></label>
-        <label for="thurs"class="px-3">Thursday<input type="checkbox" name="" id="" class=""></label>
-        <label for="fri"class="px-3">Friday<input type="checkbox" name="" id="" class=""></label>
+    <div class="row d-flex justify-content-center ">
+        <label for="mon" class="pl-5 px-3 ">Monday</label><input type="checkbox" name="" id="" class="checkbox">
+        <label for="tue" class="pl-5 px-3">Tuesday</label><input type="checkbox" name="" id="" class="">
+        <label for="wed" class="pl-5 px-3">Wednesday</label><input type="checkbox" name="" id="" class="">
+        <label for="thurs" class="pl-5 px-3">Thursday</label><input type="checkbox" name="" id="" class="">
+        <label for="fri" class="pl-5 px-3">Friday</label><input type="checkbox" name="" id="" class="">
+
     </div>
-    <div>
-    <div class="col d-flex justify-content-center">
-        <input type="submit" class="btn btn-dark" value="Add shift">
-           </div>
-        <div class="col d-flex justify-content-center">
-        <input type="submit" class="" value="Update shift">
-</div>
+    <div class="row mt-4 ">
+            <div class=" col-4  " >
+            <input type="submit" class="" value="Update shift">
+        </div>
+        <div class="col-sm  ">
+            <input type="submit" class="btn btn-dark" value="Add shift">
+        </div>
+   
+    </div>
+    </div>
     </div>
 </body>
 
