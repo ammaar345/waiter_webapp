@@ -37,7 +37,7 @@ app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.get('/',waiterRoutes.home)
-// app.get("/waiters/:username")
+ app.get("/waiters/:username",waiterRoutes.userName)
 // app.post("/waiters/:username")
 // app.get("/days",)
 const PORT = process.env.PORT || 2009;
