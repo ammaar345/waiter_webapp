@@ -7,14 +7,13 @@ create table weekdays
 (
     id serial not null primary key,
     dayofweek text,
-    weekdayid int,
 );
 create table tblshift
 (
     id serial not null primary key,
     waiternameid int,
     weekdayid int,
-    FOREIGN key weekdayid REFERENCES weekdayid(id) ,
+    FOREIGN key weekdayid REFERENCES weekdays(id) ,
     FOREIGN key (waiternameid) REFERENCES waiters(id)
 )
 INSERT INTO weekdays( [dayofweek])VALUES    ( "Monday")
