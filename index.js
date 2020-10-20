@@ -39,7 +39,7 @@ app.use(bodyParser.json())
 app.get('/',waiterRoutes.home)
  app.get("/waiters/:username",waiterRoutes.userName)
 // app.post("/waiters/:username")
-// app.get("/days",)
+ app.get("/days",waiterRoutes.admin)
 const PORT = process.env.PORT || 2009;
 app.listen(PORT, function () {
   console.log("App started at port :", PORT);
