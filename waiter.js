@@ -1,6 +1,10 @@
 module.exports = function WaiterFunc() {
 
+    async function addUser(user) {
+INSERT_QUERY="INSERT into "
 
+
+    }
 
     async function clearDataBase() {
         const DELETE_QUERY = 'DELETE FROM waiters '
@@ -8,7 +12,7 @@ module.exports = function WaiterFunc() {
     }
 
     return {
-        clearDataBase
+        clearDataBase, addUser
 
     }
 
