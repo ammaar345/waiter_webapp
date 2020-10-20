@@ -6,7 +6,7 @@ function home(req,res,next){
     function userName(req, res, next) {
         // res.render("index")
 const username=req.params.waiterName;
-res.render('index',
+res.render('employee',
 // {user
     
 // }

@@ -6,43 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-
 </head>
 
 <body>
-    <div class="container bg-dark text-primary p-5">
-        <div class="d-flex justify-content-center">
-            <h1>Waiter Availability</h1>
-        </div>
-        <div class="d-flex justify-content-center p-4">
-            <form action="/waiter" method="post">
-                <label for="waiterName">Name: <input type="text" placeholder="Enter your name" name="waiterName">
-                </label>
-        </div>
-        <div class="row d-flex justify-content-center ">
-            <label for="mon" class="pl-5 px-3 ">Monday</label><input type="checkbox" value="1" name="chkmon" id="1"
-                class="checkbox">
-            <label for="tue" class="pl-5 px-3">Tuesday</label><input type="checkbox" value="2" name="chktues" id="2" class="">
-            <label for="wed" class="pl-5 px-3">Wednesday</label><input type="checkbox" value="3" name="chkwed" id="3"
-                class="">
-            <label for="thurs" class="pl-5 px-3">Thursday</label><input type="checkbox" value="4" name="chkthurs" id="4"
-                class="">
-            <label for="fri" class="pl-5 px-3">Friday</label><input type="checkbox" value="5" name="chkfri" id="5" class="">
+    <div class="container">
+ <a href="/waiters/:username">Employee</a>
+ <a href=""></a>
+</div>
 
-        </div>
-        </form>
-        <div class="d-flex justify-content-center mt-4 ">
-            {{!-- <form action="/" method="post"></form> --}}
-            {{!-- <div class="   "> --}}
-                <input type="submit" class="btn btn-primary" value="Update shift">
-            {{!-- </div> --}}
-            {{!-- <div class="col-sm  "> --}}
-                {{!-- <input type="submit" class="btn btn-primary" value="Add shift"> --}}
-            {{!-- </div> --}}
-
-        </div>
-    </div>
-    </div>
 </body>
 
 </html>
