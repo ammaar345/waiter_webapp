@@ -5,15 +5,17 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         res.render('index');
 
     }
-  async  function userName(req, res, next) {
+    async function getWaiter(req, res, next) {
         // res.render("index")
         const username = req.params.waiterName
-        const days=await waiterRoutes.days();
-        const id=await waiterRoutes.id
+        const days = await waiterRoutes.days();
+        const id = await waiterRoutes.id()
         console.log(days)
         console.log(id)
         res.render('employee',
-            {days,id,
+            {
+                days,
+                //id,
                 username
 
             }
@@ -21,6 +23,25 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
 
     }
+   async function userCreate(req, res, next) {
+        const user = req.body.waiterName;
+        // const weekday = req.body.chkDays
+        const weekday =Array.isArray(req.body.chkDays)?req.body.days:[req.body.days]
+        const days = await waiterRoutes.days();
+       await waiterRoutes.addUser(user, weekday)
+        res.render('employee',
+            {
+                days,
+                //id,
+                username
+
+            }
+        )
+
+
+    }
+
+
     async function admin(req, res, next) {
 
         res.render("schedule",
@@ -31,13 +52,9 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
     }
 
-    function userCreate(req, res, next) {
-
-
-    }
 
     return {
-        userName,
+        getWaiter,
         userCreate,
         home,
         admin

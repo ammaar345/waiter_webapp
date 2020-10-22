@@ -14,7 +14,8 @@
         </div>
 
         <div class="d-flex justify-content-center p-4">
-            <form action="/waiter" method="get">
+            <form action="/waiters/:username" method="POST">
+               
                 <p>hello {{username}}</p>
                 <label for="waiterName">Name: <input type="text" placeholder="Enter your name" name="waiterName">
                 </label>
@@ -31,11 +32,11 @@
  --}}
             {{#each days}}
 
-            <label class="pl-5 px-3">{{this.dayofweek}}</label><input type="checkbox" name="chkdays"  value="{{this.id}}">
+            <label class="pl-5 px-3">{{this.dayofweek}}</label><input type="checkbox" name="chkDays"  value="{{this.id}}">
             {{/each}}
         </div>
 
-        </form>
+        
         <div class="d-flex justify-content-center mt-4 ">
             {{!-- <form action="/" method="post"></form> --}}
             {{!-- <div class="   "> --}}
@@ -44,7 +45,7 @@
             {{!-- <div class="col-sm  "> --}}
             {{!-- <input type="submit" class="btn btn-primary" value="Add shift"> --}}
             {{!-- </div> --}}
-
+</form>
         </div>
     </div>
     </div>

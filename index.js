@@ -37,9 +37,9 @@ app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.get('/',waiterRoutes.home)
- app.get("/waiters/:username",waiterRoutes.userName)
-// app.post("/waiters/:username")
- app.get("/days",waiterRoutes.admin)
+ app.get("/waiters/:username",waiterRoutes.getWaiter)
+ app.post("/waiters/:username",waiterRoutes.userCreate )
+ //app.get("/days",waiterRoutes.admin)
 const PORT = process.env.PORT || 2009;
 app.listen(PORT, function () {
   console.log("App started at port :", PORT);
