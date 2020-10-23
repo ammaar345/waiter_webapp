@@ -18,14 +18,24 @@ module.exports = function WaiterFunc(pool) {
             //  const SELECT_QUERY2 = 'SELECT dayofweek from weekdays where id=($1)';
             const weekdayID = await pool.query('SELECT id from weekdays where dayofweek=($1)', [day]);
             // const weekdayID=await pool.query('SELECT dayofweek from weekdays where id=($1)',[day])
-            await pool.query(INSERT_QUERY2, [ weekdayID.rows[0].id,waiter.rows[0].id])
+            await pool.query(INSERT_QUERY2, [weekdayID.rows[0].id, waiter.rows[0].id])
             // console.log(weekdayID.rows)
             console.log(weekdayID.rows)
-console.log(waiter.rows[0].id)
+            console.log(waiter.rows[0].id)
         }
-     
-    }
 
+    }
+    // async function waiterDaily(week) {
+
+    //     for (const days of week) {
+    //         const dayOfWeek = await pool.query('Select id from tblshift where id=$1', days);
+
+    //     const dayID = dayOfWeek.rows[0].id
+    //         const qrySelect = await pool.query('Select count waiterid from tblshift where id=$1', dayID);
+    //     }
+    //     console.log(qrySelect)
+
+    // }
     async function clearDataBase() {
         const DELETE_QUERY = 'DELETE FROM waiters '
         const clearDb = 'DELETE FROM tblshift'
@@ -46,8 +56,8 @@ console.log(waiter.rows[0].id)
         clearDataBase,
         addUser,
         days,
-        id
-
+        id//,
+        // waiterDaily
     }
 
 }

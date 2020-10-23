@@ -42,6 +42,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         const days = await waiterRoutes.days();
         //why is this returning empty strings
        await waiterRoutes.addUser(user, weekday)
+    //  await   waiterRoutes.waiterDaily(weekday)
         res.render('employee',
             {
                 days,
@@ -50,8 +51,17 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
             }
             
-        )
-
+        )//select waiters.name,weekdays.dayofweek from waiters left join weekdays on waiters.id=weekdays.id
+        // 
+        SELECT dayofweek 
+        FROM weekdays 
+         JOIN waiters 
+        ON weekdays.id=waiters.id 
+   
+       
+        
+       
+     
 
 
 
