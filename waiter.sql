@@ -41,27 +41,27 @@ VALUEs
 
 
 
-INSERT INTO waiters
-    (name)
-VALUES
-    ('Thabo');
-INSERT INTO waiters
-    (name)
-VALUES
-    ('Joe');
-INSERT INTO waiters
-    (name)
-VALUES
-    ('Ammaar');
-INSERT INTO waiters
-    (name)
-VALUES
-    ('Lucy');
-INSERT INTO waiters
-    (name)
-VALUES
-    ('Malikah');
-INSERT INTO waiters
-    (name)
-VALUES
-    ('Jenny');
+-- INSERT INTO waiters
+--     (name)
+-- VALUES
+--     ('Thabo');
+-- INSERT INTO waiters
+--     (name)
+-- VALUES
+--     ('Joe');
+-- INSERT INTO waiters
+--     (name)
+-- VALUES
+--     ('Ammaar');
+-- INSERT INTO waiters
+--     (name)
+-- VALUES
+--     ('Lucy');
+-- INSERT INTO waiters
+--     (name)
+-- VALUES
+--     ('Malikah');
+-- INSERT INTO waiters
+--     (name)
+-- VALUES
+--     ('Jenny');
