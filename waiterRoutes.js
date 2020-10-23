@@ -52,16 +52,17 @@ module.exports = function WaiterRoutes(waiterRoutes) {
             }
             
         )//select waiters.name,weekdays.dayofweek from waiters left join weekdays on waiters.id=weekdays.id
-        // 
-        SELECT dayofweek 
-        FROM weekdays 
-         JOIN waiters 
-        ON weekdays.id=waiters.id 
-   
+        // // 
+      
        
+    //         SELECT waiters.name AS name, weekdays.dayofweek AS weekday
+    // FROM waiters
+    // LEFT JOIN tblshift
+    // ON waiters.id=tblshift.waiternameid
+    // LEFT JOIN weekdays
+    // ON weekdays.id=tblshift.weekdayid
         
-       
-     
+        
 
 
 
