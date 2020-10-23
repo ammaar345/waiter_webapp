@@ -8,15 +8,16 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     async function getWaiter(req, res, next) {
         // res.render("index")
         const username = req.params.waiterName
-        const days = await waiterRoutes.days();
-        const id = await waiterRoutes.id()
-        // console.log(days)
+        
+        // const days = await waiterRoutes.days();
+        // const id = await waiterRoutes.id()
+        // // console.log(days)
         // console.log(id)
         res.render('employee',
             {
-                days,
+                // days,
                 //id,
-                username
+                // username
 
             }
         )
