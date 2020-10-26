@@ -26,9 +26,8 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     }
    async function userCreate(req, res, next) {
         const user = req.body.waiterName;
-
         var weekday =req.body.chkDays
-     
+     await waiterRoutes.dayObjToArray()
 
     //   console.log(user);
     //   console.log(weekday)

@@ -1,5 +1,5 @@
 module.exports = function WaiterFunc(pool) {
-
+    var arrDayCount=[]    
     async function addUser(user, week) {
         const SELECT_QUERY = 'SELECT id FROM waiters where name=($1)';
         let waiter = await pool.query(SELECT_QUERY, [user])
@@ -20,28 +20,57 @@ module.exports = function WaiterFunc(pool) {
             // const weekdayID=await pool.query('SELECT dayofweek from weekdays where id=($1)',[day])
             await pool.query(INSERT_QUERY2, [weekdayID.rows[0].id, waiter.rows[0].id])
             // console.log(weekdayID.rows)
-            console.log(weekdayID.rows)
-            console.log(waiter.rows[0].id)
+            // console.log(weekdayID.rows)
+            // console.log(waiter.rows[0].id)
         }
 
     }
- async function dayObjToArray(){
-const days=await pool.query(`  SELECT  weekdays.dayofweek AS weekday
+    async function dayObjToArray() {
+        const days = await pool.query(`  SELECT  weekdays.dayofweek AS weekday
 FROM waiters
 LEFT JOIN tblshift
 ON waiters.id=tblshift.waiternameid
 LEFT JOIN weekdays
-ON weekdays.id=tblshift.weekdayid`  ) //convert to array with obj(values)
+ON weekdays.id=tblshift.weekdayid`  )
+// console.log(typeof days)   
 
- }
-  async function waitersWorking(){
-    const waiterNames=await pool.query(`  SELECT  waiters.name AS names
+const arrDays = Object.values(days.rows);
+const arrCount=[];
+// console.log(arrDays)
+//console.log( arrDays);
+        for (let i = 0; i < arrDays.length; i++) {
+         arrDayCount.push(arrDays[i].weekday)
+        
+        //   /  console.log(arrDays.length)
+            // const day = arrDays[i]; 
+        }
+        for (let i = 0; i < arrDayCount.length; i++) {
+           var week=['Monday','Tuesday','Wednesday','Thursday','Friday']
+            var day = arrDayCount[i];
+            if(day===week[i]){
+arrCount.push(day)
+
+            }
+            
+        }
+        console.log(arrCount)
+        // for (let i = 0; i < arrDayCount.length; i++) {
+        //     const element = array[i];
+            
+        // }
+        // console.log(arrDayCount)
+   
+        //convert to array with obj(values)
+
+    }
+    async function waitersWorking() {
+        const waiterNames = await pool.query(`  SELECT  waiters.name AS names
     FROM waiters
     LEFT JOIN tblshift
     ON waiters.id=tblshift.waiternameid
     LEFT JOIN weekdays
     ON weekdays.id=tblshift.weekdayid`  )//no structure to really show which day he /she is working
-  }
+    }
     async function clearDataBase() {
         const DELETE_QUERY = 'DELETE FROM waiters '
         const clearDb = 'DELETE FROM tblshift'
