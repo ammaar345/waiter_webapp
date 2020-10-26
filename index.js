@@ -10,7 +10,7 @@ const session = require('express-session');
 const pg = require("pg");
 const Pool = pg.Pool;
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/waiters';
+const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/waiters';
 
 const pool = new Pool({
     connectionString
@@ -39,7 +39,7 @@ app.use(bodyParser.json())
 app.get('/',waiterRoutes.home)
  app.get("/waiters/:username",waiterRoutes.getWaiter)
  app.post("/waiters/:username",waiterRoutes.userCreate )
- //app.get("/days",waiterRoutes.admin)
+ app.get("/days",waiterRoutes.admin)
 const PORT = process.env.PORT || 2009;
 app.listen(PORT, function () {
   console.log("App started at port :", PORT);

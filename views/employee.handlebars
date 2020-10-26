@@ -12,14 +12,16 @@
         <div class="d-flex justify-content-center">
             <h1>Waiter Availability</h1>
         </div>
-
+   <a href="/"> <button>Home</button></a>
         <div class="d-flex justify-content-center p-4">
+         
             <form action="/waiters/:username" method="POST">
-               
+      
                 {{!-- <p>hello {{username}}</p> --}}
                 <label for="waiterName">Name: <input type="text" placeholder="Enter your name" name="waiterName">
                 </label>
         </div>
+               
         <div class="row d-flex justify-content-center ">
             <label for="mon" class="pl-5 px-3 ">Monday</label><input type="checkbox" value="Monday" name="chkDays" id="1"
                 class="checkbox">

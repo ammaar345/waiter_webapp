@@ -8,7 +8,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     async function getWaiter(req, res, next) {
         // res.render("index")
         const username = req.params.waiterName
-        
+
         // const days = await waiterRoutes.days();
         // const id = await waiterRoutes.id()
         // // console.log(days)
@@ -24,25 +24,25 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
 
     }
-   async function userCreate(req, res, next) {
+    async function userCreate(req, res, next) {
         const user = req.body.waiterName;
-        var weekday =req.body.chkDays
-     await waiterRoutes.dayObjToArray()
+        var weekday = req.body.chkDays
+        //  await waiterRoutes.dayObjToArray()
 
-    //   console.log(user);
-    //   console.log(weekday)
+        //   console.log(user);
+        //   console.log(weekday)
         // const weekday = req.body.chkDays
         // var array = []
-// var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
+        // var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
 
-// for (var i = 0; i < weekday.length; i++) {
-//   array.push(weekday[i])
+        // for (var i = 0; i < weekday.length; i++) {
+        //   array.push(weekday[i])
 
 
         const days = await waiterRoutes.days();
         //why is this returning empty strings
-       await waiterRoutes.addUser(user, weekday)
-    //  await   waiterRoutes.waiterDaily(weekday)
+        await waiterRoutes.addUser(user, weekday)
+        //  await   waiterRoutes.waiterDaily(weekday)
         res.render('employee',
             {
                 days,
@@ -50,31 +50,33 @@ module.exports = function WaiterRoutes(waiterRoutes) {
                 user
 
             }
-            
+
         )//select waiters.name,weekdays.dayofweek from waiters left join weekdays on waiters.id=weekdays.id
         // // 
-      /*waiters.name AS name,*/
-       
-    //         SELECT  weekdays.dayofweek AS weekday
-    // FROM waiters
-    // LEFT JOIN tblshift
-    // ON waiters.id=tblshift.waiternameid
-    // LEFT JOIN weekdays
-    // ON weekdays.id=tblshift.weekdayid
-        
-//         select dayofweek as weekday
-// from weekdays
+        /*waiters.name AS name,*/
 
-// left join waiters
-// on weekdays.dayofweek=waiters.name
+        //         SELECT  weekdays.dayofweek AS weekday
+        // FROM waiters
+        // LEFT JOIN tblshift
+        // ON waiters.id=tblshift.waiternameid
+        // LEFT JOIN weekdays
+        // ON weekdays.id=tblshift.weekdayid
+
+        //         select dayofweek as weekday
+        // from weekdays
+
+        // left join waiters
+        // on weekdays.dayofweek=waiters.name
     }
 
 
     async function admin(req, res, next) {
-
-        res.render("schedule",
+        const onDuty = await waiterRoutes.dayObjToArray()
+       const workingWaiters=await waiterRoutes.waitersWorking()
+       console.log(onDuty)
+       res.render("schedule",
             {
-
+                onDuty
             })
 
 

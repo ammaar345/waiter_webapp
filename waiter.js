@@ -1,5 +1,5 @@
 module.exports = function WaiterFunc(pool) {
-    var arrDayCount=[]    
+    var arrDayCount = []
     async function addUser(user, week) {
         const SELECT_QUERY = 'SELECT id FROM waiters where name=($1)';
         let waiter = await pool.query(SELECT_QUERY, [user])
@@ -32,34 +32,26 @@ LEFT JOIN tblshift
 ON waiters.id=tblshift.waiternameid
 LEFT JOIN weekdays
 ON weekdays.id=tblshift.weekdayid`  )
-// console.log(typeof days)   
-
-const arrDays = Object.values(days.rows);
-const arrCount=[];
-// console.log(arrDays)
-//console.log( arrDays);
+        // console.log(typeof days)   
+return days.rows;
+        const arrDays = Object.values(days.rows);
+        const arrCount = [];
+        // console.log(arrDays)
+        //console.log( arrDays);
         for (let i = 0; i < arrDays.length; i++) {
-         arrDayCount.push(arrDays[i].weekday)
-        
-        //   /  console.log(arrDays.length)
-            // const day = arrDays[i]; 
+            arrDayCount.push(arrDays[i].weekday)
         }
         for (let i = 0; i < arrDayCount.length; i++) {
-           var week=['Monday','Tuesday','Wednesday','Thursday','Friday']
+            var week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
             var day = arrDayCount[i];
-            if(day===week[i]){
-arrCount.push(day)
+            if (day === week[i]) {
+                arrCount.push(day)
 
             }
-            
+
         }
         console.log(arrCount)
-        // for (let i = 0; i < arrDayCount.length; i++) {
-        //     const element = array[i];
-            
-        // }
-        // console.log(arrDayCount)
-   
+
         //convert to array with obj(values)
 
     }
@@ -92,7 +84,8 @@ arrCount.push(day)
         addUser,
         days,
         id,
-        dayObjToArray
+        dayObjToArray,
+        waitersWorking
     }
 
 }

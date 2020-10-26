@@ -5,20 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <table>
 
-    {{!-- <tbody>
-				{{#each kittens}}
-				<tr>
-					<th scope="row">{{id}}</th>
-					<td>{{name}}</td>
-					<td>{{days}}</td>
-					<td>{{arrivingOn}}</td>
-				</tr>
+<body>
+	<a href="/"> <button>Home</button></a>
+	<form action="/days" method="get">
+    {{!-- <table> --}}
+
+				{{#each waiters}}
+					<li>{{this.dayofweek}}</li>
 				{{/each}}
 				
-			</tbody> --}}
-    </table>
+		</form>
+    {{!-- </table> --}}
 </body>
 </html>
