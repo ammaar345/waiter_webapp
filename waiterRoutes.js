@@ -76,7 +76,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
        console.log(workingWaiters)
        res.render('schedule',
             {
-                workingWaiters
+              waiter  :workingWaiters
             }
             )
 
