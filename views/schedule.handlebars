@@ -16,8 +16,11 @@
 		<form action="/days" method="get">
 			{{!-- <table> --}}
 
-			{{#each waiter}}
+			{{!-- {{#each waiter}}
 			<li>{{this.names}}</li>
+			{{/each}} --}}
+	{{#each day}}
+			<li>{{this.weekday}}</li>
 			{{/each}}
 
 		</form>
