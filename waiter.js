@@ -61,7 +61,8 @@ return days.rows;
     LEFT JOIN tblshift
     ON waiters.id=tblshift.waiternameid
     LEFT JOIN weekdays
-    ON weekdays.id=tblshift.weekdayid`  )//no structure to really show which day he /she is working
+    ON weekdays.id=tblshift.weekdayid`  )
+    return waiterNames.rows//no structure to really show which day he /she is working
     }
     async function clearDataBase() {
         const DELETE_QUERY = 'DELETE FROM waiters '

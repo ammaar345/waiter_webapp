@@ -73,11 +73,12 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     async function admin(req, res, next) {
         const onDuty = await waiterRoutes.dayObjToArray()
        const workingWaiters=await waiterRoutes.waitersWorking()
-       console.log(onDuty)
-       res.render("schedule",
+       console.log(workingWaiters)
+       res.render('schedule',
             {
-                onDuty
-            })
+                workingWaiters
+            }
+            )
 
 
     }

@@ -8,11 +8,11 @@
 
 <body>
 	<a href="/"> <button>Home</button></a>
-	<form action="/days" method="get">
+	<form action="" method="get">
     {{!-- <table> --}}
 
-				{{#each waiters}}
-					<li>{{this.dayofweek}}</li>
+				{{#each waiter}}
+					<li>{{this.names}}</li>
 				{{/each}}
 				
 		</form>
