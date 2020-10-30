@@ -26,28 +26,15 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     }
     async function userCreate(req, res, next) {
         const user = req.body.waiterName;
-        var weekday = req.body.chkDays
-         await waiterRoutes.dayObjToArray()
-
-        //   console.log(user);
-        //   console.log(weekday)
-        // const weekday = req.body.chkDays
-        // var array = []
-        // var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-
-        // for (var i = 0; i < weekday.length; i++) {
-        //   array.push(weekday[i])
-
-
-        const days = await waiterRoutes.days();
-        //why is this returning empty strings
+        var weekday = req.body.chkDays;
         await waiterRoutes.addUser(user, weekday)
+     
         //  await   waiterRoutes.waiterDaily(weekday)
         res.render('employee',
             {
-                days,
+                
                 //id,
-                user
+              
 
             }
 
@@ -71,12 +58,16 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
 
     async function admin(req, res, next) {
-        const day = await waiterRoutes.dayObjToArray()
-       const workingWaiters=await waiterRoutes.waitersWorking()
-       console.log(workingWaiters)
-       res.render('schedule',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    //    const workingWaiters=await waiterRoutes.waitersWorking()
+       const days =  await waiterRoutes.dayNameList();
+       //why is this returning empty strings
+      console.log(days)
+       
+    //    console.log(workingWaiters)                                                                                                                                                                                                                          
+       res.render('schedule',                                                               
             {
-             day
+             days
             }
             )
 

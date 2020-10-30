@@ -14,14 +14,40 @@
 	</div>
 	<div class="mt-5 pr-4">
 		<form action="/days" method="get">
+
+			<table class="">
+
+				<tr>
+					{{#each days}}
+					<th>
+
+						{{this.dayname}}
+
+					</th>
+					{{/each}}
+				</tr>
+				<tr>
+					{{#each days}}
+
+					<td>
+						<ul>{{#each waiters}}
+							<li>{{this.name}}</li>
+						
+						{{/each}}
+						</ul>
+					</td>
+
+					{{/each}}
+				</tr>
+			</table>
 			{{!-- <table> --}}
 
 			{{!-- {{#each waiter}}
 			<li>{{this.names}}</li>
 			{{/each}} --}}
-	{{#each day}}
+			{{!-- {{#each day}}
 			<li>{{this.weekday}}</li>
-			{{/each}}
+			{{/each}} --}}
 
 		</form>
 	</div>

@@ -28,45 +28,50 @@ module.exports = function WaiterFunc(pool) {
         }
 
     }
-    async function dayObjToArray() {
-        const days = await pool.query(`  SELECT  weekdays.dayname AS weekday
-FROM waiters
-LEFT JOIN tblshift
-ON waiters.id=tblshift.waiternameid
-LEFT JOIN weekdays
-ON weekdays.id=tblshift.weekdayid`  )
-//         // console.log(typeof days)   
-//         // return days.rows;
-//         const arrDays = Object.values(days.rows);
-//         console.log(arrDays)
-//         const arrCount = [];
-//         // console.log(arrDays)
-//         //console.log( arrDays);
-//         for (let i = 0; i < arrDays.length; i++) {
-//             console.log(arrDays[i].weekday)
-//             arrDayCount.push(arrDays[i].weekday)
-//         }
-//         for (let i = 0; i < arrDayCount.length; i++) {
-//             var week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-//             var day = arrDayCount[i];
-//             if (day === week[i]) {
-//                 arrCount.push(day)
-
-//             }
-
-//         }
-//         console.log(arrCount)
-
-//         //convert to array with obj(values)
-
+    async function  daysOfWeek(){
+const days=await pool.query('Select dayname from weekdays');
+return days.rows
     }
-    async function waitersWorking() {
-        const waiterNames = await pool.query(`  SELECT  waiters.name AS names
+//     async function dayObjToArray() {
+//         const days = await pool.query(`  SELECT  weekdays.dayname AS weekday
+// FROM waiters
+// LEFT JOIN tblshift
+// ON waiters.id=tblshift.waiternameid
+// LEFT JOIN weekdays
+// ON weekdays.id=tblshift.weekdayid`  )
+// //         // console.log(typeof days)   
+// //         // return days.rows;
+// //         const arrDays = Object.values(days.rows);
+// //         console.log(arrDays)
+// //         const arrCount = [];
+// //         // console.log(arrDays)
+// //         //console.log( arrDays);
+// //         for (let i = 0; i < arrDays.length; i++) {
+// //             console.log(arrDays[i].weekday)
+// //             arrDayCount.push(arrDays[i].weekday)
+// //         }
+// //         for (let i = 0; i < arrDayCount.length; i++) {
+// //             var week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+// //             var day = arrDayCount[i];
+// //             if (day === week[i]) {
+// //                 arrCount.push(day)
+
+// //             }
+
+// //         }
+// //         console.log(arrCount)
+
+// //         //convert to array with obj(values)
+
+//     }
+    async function waitersWorking(day) {
+        const waiterNames = await pool.query(`SELECT  waiters.name AS name
     FROM waiters
     LEFT JOIN tblshift
     ON waiters.id=tblshift.waiternameid
     LEFT JOIN weekdays
-    ON weekdays.id=tblshift.weekdayid`  )
+    ON weekdays.id=tblshift.weekdayid
+    where weekdays.id=$1` ,[day] )
         return waiterNames.rows//no structure to really show which day he /she is working
     }
     async function clearDataBase() {
@@ -84,7 +89,7 @@ ON weekdays.id=tblshift.weekdayid`  )
         const selectQuery = 'SELECT id from weekdays'
         const id = await pool.query(selectQuery);
         return id.rows
-    }
+    }   
     function dayColor(waiterCount) {
         if (waiterCount = 3) {
             return "green"
@@ -102,14 +107,31 @@ ON weekdays.id=tblshift.weekdayid`  )
     // function dayMsg(waiterCnt){
 
     // }
+   async function dayNameList(){
+    const dayObjs=await pool.query ('select * from weekdays');
+    const days=dayObjs.rows;
+        for (let i = 0; i < days.length; i++) {
+            const day = days[i];
+            const waiters= await waitersWorking(day.id)
+            
+            day.waiters=waiters;
+            
+        }
+        // console.log(waiters);
+        console.log(days)
+        return dayObjs.rows
+    }
     return {
         dayColor,
         clearDataBase,
         addUser,
         days,
         id,
-        dayObjToArray,
-        waitersWorking
+        dayNameList,
+        // dayObjToArray,
+        waitersWorking,
+        daysOfWeek,
+        
     }
 
 }
