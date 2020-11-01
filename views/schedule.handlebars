@@ -8,24 +8,68 @@
 </head>
 
 <body>
-	<div class=" d-flex justify-content-center">
-		<a href="/"> <button>Home</button></a>
-
+	<div class="row">
+		<div class="col-6 pr-4">
+		<a href="/"><i class="fas fa-home fa-2x"></i></a>
+		</div>
 	</div>
-	<div class="mt-5 pr-4">
+
+	<table class="table table-bordered table-dark">
+		<thead>
+
+			<tr>
+				{{#each days}}
+				<th scope="col">
+					{{this.dayname}}
+
+				</th>
+				{{/each}}
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr>
+				{{!-- <th scope="row">1</th> --}}
+				{{#each days}}
+
+				<td>
+					{{#each waiters}}
+					<li>{{this.name}}</li>
+
+					{{/each}}
+
+				</td>
+
+				{{/each}}
+
+			</tr>
+
+		</tbody>
+		{{!-- <td> --}}
+		{{!-- <a href="/"> <button class=" btn btn-light ">Home</button> </a> --}}
+		{{!-- </td> --}}
+
+	</table>
+
+	{{!-- 
+
+
 		<form action="/days" method="get">
 
-			<table class="">
-
-				<tr>
+			<table class=" table table-striped table-dark">
+<thead>		
+		<tr>
+					
 					{{#each days}}
-					<th>
+					<th scope="col">
 
 						{{this.dayname}}
 
 					</th>
 					{{/each}}
 				</tr>
+				</thead>
+
 				<tr>
 					{{#each days}}
 
@@ -34,24 +78,19 @@
 							<li>{{this.name}}</li>
 						
 						{{/each}}
-						</ul>
+						
 					</td>
 
 					{{/each}}
 				</tr>
-			</table>
-			{{!-- <table> --}}
+			</table> --}}
 
-			{{!-- {{#each waiter}}
-			<li>{{this.names}}</li>
-			{{/each}} --}}
-			{{!-- {{#each day}}
-			<li>{{this.weekday}}</li>
-			{{/each}} --}}
 
-		</form>
+	</form>
+	<div class="row">
+
+
 	</div>
-	{{!-- </table> --}}
 </body>
 
 </html>
