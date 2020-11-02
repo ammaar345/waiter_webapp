@@ -12,47 +12,32 @@
         <div class="d-flex justify-content-center">
             <h1>Waiter Availability</h1>
         </div>
-	<a href="/"><i class="fas fa-home fa-2x"></i></a>
+        <a href="/"><i class="fas fa-home fa-2x"></i></a>
         <div class="d-flex justify-content-center p-4">
-         
-            <form action="/waiters/:username" method="POST">
-      
-                {{!-- <p>hello {{username}}</p> --}}
-                <label for="waiterName">Name: <input type="text" placeholder="Enter your name" name="waiterName">
-                </label>
+            {{#each user}}
+            <form action="/waiters/{{this.name}}" method="POST">
+
+                <p>hi {{this.name}}</p>
+           
+                {{/each}}
         </div>
-               
+
         <div class="row d-flex justify-content-center ">
-            <label for="mon" class="pl-5 px-3 ">Monday</label><input type="checkbox" value="Monday" name="chkDays" id="1"
-                class="checkbox">
-            <label for="tue" class="pl-5 px-3">Tuesday</label><input type="checkbox" value="Tuesday" name="chkDays" id="2" class="">
-            <label for="wed" class="pl-5 px-3">Wednesday</label><input type="checkbox" value="Wednesday" name="chkDays" id="3"
+            <label for="mon" class="pl-5 px-3 ">Monday</label><input type="checkbox" value="Monday" name="chkDays"
+                id="1" class="checkbox">
+            <label for="tue" class="pl-5 px-3">Tuesday</label><input type="checkbox" value="Tuesday" name="chkDays"
+                id="2" class="">
+            <label for="wed" class="pl-5 px-3">Wednesday</label><input type="checkbox" value="Wednesday" name="chkDays"
+                id="3" class="">
+            <label for="thurs" class="pl-5 px-3">Thursday</label><input type="checkbox" value="Thursday" name="chkDays"
+                id="4" class="">
+            <label for="fri" class="pl-5 px-3">Friday</label><input type="checkbox" value="Friday" name="chkDays" id="5"
                 class="">
-            <label for="thurs" class="pl-5 px-3">Thursday</label><input type="checkbox" value="Thursday" name="chkDays" id="4"
-                class="">
-            <label for="fri" class="pl-5 px-3">Friday</label><input type="checkbox" value="Friday" name="chkDays" id="5" class="">
-
-            {{!-- {{#each days}}
-
-            <label class="pl-5 px-3">{{this.dayofweek}}</label><input type="checkbox" name="chkDays"  value="{{this.id}}">
-         
-            {{!-- {{/each}} --}}
         </div>
-
-        
-        <div class="d-flex justify-content-center mt-4 ">
-            {{!-- <form action="/" method="post"></form> --}}
-            {{!-- <div class="   "> --}}
-            <input type="submit" class="btn btn-light" value="Update shift">
-            {{!-- </div> --}}
-            {{!-- <div class="col-sm  "> --}}
-            {{!-- <input type="submit" class="btn btn-primary" value="Add shift"> --}}
-            {{!-- </div> --}}
-</form>
-{{!-- <form action="/" method="get">
-<input type="submit" value="Reset" class="ml-2 btn btn-primary">
-</form> --}}
-        </div>
+  <input type="submit" class="btn btn-light" value="Update shift">
+        </form>
+       
+    </div>
     </div>
     </div>
 </body>
