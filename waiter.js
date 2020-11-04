@@ -42,16 +42,17 @@ module.exports = function WaiterFunc(pool) {
     }
 
     function dayColor(waiterCount) {
+        if (waiterCount < 3) {
+            return "red"
+
+        } else if (waiterCount > 3) {
+            return "orange"
+        }
         if (waiterCount = 3) {
             return "green"
         }
-        if (waiterCount > 3) {
-            return "orange"
-        }
-        else if (waiterCount < 3) {
-            return "red"
 
-        }
+
 
     }
     async function dayNameList() {

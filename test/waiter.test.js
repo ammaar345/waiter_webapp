@@ -93,22 +93,45 @@ describe("Should test the functions in Waiters that are returning values", funct
     await waiter.addUser('Ammaar', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
     await waiter.addUser('Joe', ['Tuesday', 'Monday', 'Tuesday', 'Wednesday']);
     await waiter.clearDataBase();
-assert.deepEqual(await waiter.daysNames(),[])
+    assert.deepEqual(await waiter.daysNames(), [])
   })
   it("tests if the database clears three datasets.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Ammaar', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
     await waiter.addUser('Joe', ['Tuesday', 'Monday', 'Friday']);
-    await waiter.addUser('Henry', [ 'Monday', 'Friday']);
+    await waiter.addUser('Henry', ['Monday', 'Friday']);
     await waiter.clearDataBase();
-assert.deepEqual(await waiter.daysNames(),[])
+    assert.deepEqual(await waiter.daysNames(), [])
   })
   it("tests if the database clears one dataset.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Jenna', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
     await waiter.clearDataBase();
-assert.deepEqual(await waiter.daysNames(),[]);
+    assert.deepEqual(await waiter.daysNames(), []);
   })
+
+  it("returns red if the number of waiters is less than 3.",  function () {
+    let waiter = Waiter(pool);
+    let waiterCount=2
+    
+    assert.equal(waiter.dayColor(waiterCount), 'red');
+  })
+
+
+  it("returns orange if the number of waiters is more than 3.", async function () {
+    let waiter = Waiter(pool);
+    let waiterCount=4
+   
+    assert.equal(await waiter.dayColor(waiterCount
+      ), 'orange');
+  })
+
+  it("returns green if the number of waiters is equal to 3.", async function () {
+    let waiter = Waiter(pool);
+    let waiterCount=3
+assert.equal(await waiter.dayColor(waiterCount),'green');
+  })
+
 })
 
 
