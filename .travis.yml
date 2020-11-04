@@ -5,6 +5,6 @@ env:
   - DATABASE_URL=postgresql://postgres@localhost:5432/waiters
 before_script:
   - psql -c 'create database  waiters;' -U postgres
-  - psql -U postgres -d registration -a -f waiter.sql
+  - psql -U postgres -d waiters -a -f waiter.sql
 services:
   - postgresql
