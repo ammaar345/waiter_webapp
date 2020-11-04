@@ -53,7 +53,7 @@ console.log(weekday);
 
 
     }
-async function waiterHome(req,res,){
+async function waiterHome(req,res){
 res.render('employee',{
     
 })

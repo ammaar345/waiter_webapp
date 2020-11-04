@@ -67,7 +67,7 @@ describe("Should test the functions in Waiters that are returning values", funct
   })
   it("Should add the day ID of Friday , Monday and Tuesday as well as the waiter ID into the database.", async function () {
     let waiter = Waiter(pool);
-    await waiter.addUser('Joe', ['Friday', 'Monday', 'Tuesday','Wednesday']);
+    await waiter.addUser('Joe', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
     assert.deepEqual(await waiter.daysNames(), [
       {
         waiternameid: 1,
@@ -88,15 +88,27 @@ describe("Should test the functions in Waiters that are returning values", funct
     ])
 
   })
-  // describe("Should test that the registrations are being inserted into the database.", async function () {
-  //     it("Should show  3 registrations in the database.", async function () {
-  //     })
-  // it("Should return  2 registrations in the database.", async function () {
-  //       })
-  // it("Should show  3 registrations in the database , since one registration is a duplicate.", async function () {
-
-  // })
-
+  it("tests if the database clears dataset.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Ammaar', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
+    await waiter.addUser('Joe', ['Tuesday', 'Monday', 'Tuesday', 'Wednesday']);
+    await waiter.clearDataBase();
+assert.deepEqual(await waiter.daysNames(),[])
+  })
+  it("tests if the database clears three datasets.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Ammaar', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
+    await waiter.addUser('Joe', ['Tuesday', 'Monday', 'Friday']);
+    await waiter.addUser('Henry', [ 'Monday', 'Friday']);
+    await waiter.clearDataBase();
+assert.deepEqual(await waiter.daysNames(),[])
+  })
+  it("tests if the database clears one dataset.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Jenna', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
+    await waiter.clearDataBase();
+assert.deepEqual(await waiter.daysNames(),[]);
+  })
 })
 
 
