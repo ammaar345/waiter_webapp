@@ -88,7 +88,7 @@ describe("Should test the functions in Waiters that are returning values", funct
     ])
 
   })
-  it("tests if the database clears dataset.", async function () {
+  it("tests if the database clears two datasets.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Ammaar', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
     await waiter.addUser('Joe', ['Tuesday', 'Monday', 'Tuesday', 'Wednesday']);
