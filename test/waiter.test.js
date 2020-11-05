@@ -8,7 +8,7 @@ const pool = new Pool({
   connectionString
 });
 beforeEach(async function () {
-  await pool.query('drop table if EXISTS tblshift,waiters;');
+  await pool.query('drop table if EXISTS tblshift,waiters');
   await pool.query(`create table waiters
      (id serial not null primary key,
          name text not null
@@ -110,27 +110,63 @@ describe("Should test the functions in Waiters that are returning values", funct
     assert.deepEqual(await waiter.daysNames(), []);
   })
 
-  it("returns red if the number of waiters is less than 3.",  function () {
+  it("returns red if the number of waiters is less than 3.", function () {
     let waiter = Waiter(pool);
-    let waiterCount=2
-    
+    let waiterCount = 2
+
     assert.equal(waiter.dayColor(waiterCount), 'red');
   })
 
 
   it("returns orange if the number of waiters is more than 3.", async function () {
     let waiter = Waiter(pool);
-    let waiterCount=4
-   
+    let waiterCount = 4
+
     assert.equal(await waiter.dayColor(waiterCount
-      ), 'orange');
+    ), 'orange');
   })
 
   it("returns green if the number of waiters is equal to 3.", async function () {
     let waiter = Waiter(pool);
-    let waiterCount=3
-assert.equal(await waiter.dayColor(waiterCount),'green');
+    let waiterCount = 3
+    assert.equal(await waiter.dayColor(waiterCount), 'green');
   })
+  it("should count 6 workers for monday.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Ammaar', ['Monday']);
+    await waiter.addUser('Joe', ['Monday',]);
+    await waiter.addUser('Thomas', ['Monday',]);
+    await waiter.addUser('Jen', ['Monday',]);
+    await waiter.addUser('Low', ['Monday',]);
+    await waiter.addUser('Lee', ['Monday',]);
+    const waiterCount = await waiter.waitersWorking(1)
+    assert.equal(await waiterCount.length, 6)
+
+  })
+  it("should count 2 workers for Tuesday.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Ammaar', ['Tuesday']);
+    await waiter.addUser('Joe', ['Tuesday']);
+    const waiterCount = await waiter.waitersWorking(2)
+    assert.equal(await waiterCount.length, 2)
+
+  })
+  it("should count 3 workers for Wednesday.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Jody', ['Wednesday']);
+    await waiter.addUser('Ester', ['Wednesday']);
+    const waiterCount = await waiter.waitersWorking(3)
+    assert.equal(await waiterCount.length, 2)
+
+  })
+  it("should count 1 worker for Friday.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Timothy', ['Friday']);
+     const waiterCount = await waiter.waitersWorking(5)
+    assert.equal(await waiterCount.length, 1)
+
+  })
+
 
 })
 

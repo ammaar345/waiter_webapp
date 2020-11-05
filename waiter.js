@@ -41,14 +41,14 @@ module.exports = function WaiterFunc(pool) {
         return waiterNames.rows//no structure to really show which day he /she is working
     }
 
-    function dayColor(waiterCount) {
-        if (waiterCount < 3) {
+    function dayColor(waiterNum) {
+        if (waiterNum < 3) {
             return "red"
 
-        } else if (waiterCount > 3) {
+        } else if (waiterNum > 3) {
             return "orange"
         }
-        if (waiterCount = 3) {
+        if (waiterNum = 3) {
             return "green"
         }
 
@@ -61,11 +61,25 @@ module.exports = function WaiterFunc(pool) {
         for (let i = 0; i < days.length; i++) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
-
+        //    console.log(waiters.length   )
             day.waiters = waiters;
-
+  
         }
-        return dayObjs.rows
+        return days
+    }
+    async function waiterCount(){
+
+        const dayObjs = await pool.query('select * from weekdays');
+        const days = dayObjs.rows;
+        for (let i = 0; i < days.length; i++) {
+            const day = days[i];
+            const waiters = await waitersWorking(day.id)
+        //    console.log(waiters.length)
+            // day.waiters = waiters;
+  return waiters.length
+        }
+        
+    
     }
     return {
         dayColor,
@@ -73,7 +87,8 @@ module.exports = function WaiterFunc(pool) {
         addUser,
         dayNameList,
         waitersWorking,
-        daysNames
+        daysNames,
+        waiterCount
     }
 
 }
