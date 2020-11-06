@@ -23,7 +23,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
         console.log(weekday)
         console.log(await waiterRoutes.waiterCount())
-        await waiterRoutes.addUser(username, [weekday]);
+        await waiterRoutes.addUser(username, weekday);
 
         res.render('employee',
             {
@@ -43,12 +43,12 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         //    const workingWaiters=await waiterRoutes.waitersWorking()
         const days = await waiterRoutes.dayNameList();
         const waiterCount = await waiterRoutes.waiterCount();
-        const counter = await waiterRoutes.dayColor(waiterCount)
+        const count= await waiterRoutes.dayColor(waiterCount)
         res.render('schedule',
             {
                 days,
                 counter: [{
-                    'color': counter
+                    'color': count
                 }]
             }
         )
