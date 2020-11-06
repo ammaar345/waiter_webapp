@@ -20,11 +20,11 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     async function userCreate(req, res, next) {
         const username = req.params.username;
         const weekday = req.body.chkDays;
+
+        console.log(weekday)
         console.log(await waiterRoutes.waiterCount())
-        await waiterRoutes.addUser(username, weekday)
-console.log(username);
-console.log(weekday);
-        //  await   waiterRoutes.waiterDaily(weekday)
+        await waiterRoutes.addUser(username, [weekday]);
+
         res.render('employee',
             {
                 user: [{
@@ -42,23 +42,24 @@ console.log(weekday);
 
         //    const workingWaiters=await waiterRoutes.waitersWorking()
         const days = await waiterRoutes.dayNameList();
-        //why is this returning empty strings
-        // console.log(days)
-
-        //    console.log(workingWaiters)                                                                                                                                                                                                                          
+        const waiterCount = await waiterRoutes.waiterCount();
+        const counter = await waiterRoutes.dayColor(waiterCount)
         res.render('schedule',
             {
-                days
+                days,
+                counter: [{
+                    'color': counter
+                }]
             }
         )
 
 
     }
-async function waiterHome(req,res){
-res.render('employee',{
-    
-})
-}
+    async function waiterHome(req, res) {
+        res.render('employee', {
+
+        })
+    }
 
     return {
         getWaiter,

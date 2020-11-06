@@ -18,14 +18,24 @@
 		<thead>
 
 			<tr>
+		{{!-- {{#each counter}} --}}
+		{{!-- {{#each counter}} --}}
+		{{!-- <li class={{this.color}}> bread</li> --}}
+			
 				{{#each days}}
-				<th scope="col">
+		
+
+
+
+				<th scope="col" class={{this.color}}>
+					{{!-- {{/each}} --}}
 					{{this.dayname}}
 
 				</th>
 				{{/each}}
+			
 			</tr>
-
+{{!-- {{/each}} --}}
 		</thead>
 		<tbody>
 			<tr>

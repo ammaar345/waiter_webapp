@@ -76,7 +76,7 @@ module.exports = function WaiterFunc(pool) {
             const waiters = await waitersWorking(day.id)
         //    console.log(waiters.length)
             // day.waiters = waiters;
-  return waiters.length
+  return waiters.length;
         }
         
     
