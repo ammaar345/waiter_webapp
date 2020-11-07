@@ -6,7 +6,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     async function getWaiter(req, res, next) {
         // res.render("index")
         const user = req.params.username;
-        console.log(user);
+        // console.log(user);
         res.render('employee',
             {
                 user: [{
@@ -21,8 +21,14 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         const username = req.params.username;
         const weekday = req.body.chkDays;
 
-        console.log(weekday)
-        console.log(await waiterRoutes.waiterCount())
+        // console.log(weekday)
+    //    for (let i = 0; i < array.length; i++) {
+    //        const element = array[i];
+           
+    //    }
+    // await waiterRoutes.waiterCount()
+    await waiterRoutes.countWaiters()
+        // console.log(await waiterRoutes.waiterCount())
         await waiterRoutes.addUser(username, weekday);
 
         res.render('employee',
@@ -39,17 +45,19 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
 
     async function admin(req, res, next) {
-
-        //    const workingWaiters=await waiterRoutes.waitersWorking()
         const days = await waiterRoutes.dayNameList();
-        const waiterCount = await waiterRoutes.waiterCount();
+      const waiterCount=await waiterRoutes.countWaiters()
+    //   console.log(waiterCount)
+    // console.log(waiterCount)
         const count= await waiterRoutes.dayColor(waiterCount)
+        // console.log(await waiterRoutes.waiterCounting())
         res.render('schedule',
             {
                 days,
-                counter: [{
-                    'color': count
-                }]
+                // counter: [{
+                //     'color': 
+                //     count
+                // }]
             }
         )
 

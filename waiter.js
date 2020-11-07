@@ -1,4 +1,5 @@
 module.exports = function WaiterFunc(pool) {
+    let waiterCount
     async function addUser(user, week) {
         const SELECT_QUERY = 'SELECT id FROM waiters where name=($1)';
 
@@ -61,26 +62,32 @@ module.exports = function WaiterFunc(pool) {
         for (let i = 0; i < days.length; i++) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
-        //    console.log(waiters.length   )
+        
             day.waiters = waiters;
   
+            // console.log (day.waiters.length)
         }
         return days
     }
-    async function waiterCount(){
-
+    async function countWaiters() {
         const dayObjs = await pool.query('select * from weekdays');
         const days = dayObjs.rows;
         for (let i = 0; i < days.length; i++) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
-        //    console.log(waiters.length)
-            // day.waiters = waiters;
-  return waiters.length;
+            day.waiters = waiters;
+            console.log(day.waiters.length)   //correct values but when returning i get the first value only??
+            waiterCount=day.waiters.length 
+            
+            // return day.waiters.length
         }
+        return waiterCount
         
-    
     }
+//   async function waiterCounting(){
+//         console.log(waiterCount);
+//         return waiterCount
+//     }
     return {
         dayColor,
         clearDataBase,
@@ -88,7 +95,8 @@ module.exports = function WaiterFunc(pool) {
         dayNameList,
         waitersWorking,
         daysNames,
-        waiterCount
+        countWaiters,
+        // waiterCounting
     }
 
 }
