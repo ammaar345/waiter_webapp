@@ -42,18 +42,22 @@ module.exports = function WaiterFunc(pool) {
         return waiterNames.rows//no structure to really show which day he /she is working
     }
 
-    function dayColor(waiterNum) {
+   async function dayColor(waiterNum) {
+        // const day = await pool.query('select * from weekdays');
+        // const days = day.rows;
+        // for (let i = 0; i < days.length; i++) {
         if (waiterNum < 3) {
             return "red"
 
-        } else if (waiterNum > 3) {
+        } 
+        else if (waiterNum > 3) {
             return "orange"
         }
         if (waiterNum = 3) {
             return "green"
         }
 
-
+    // }
 
     }
     async function dayNameList() {
@@ -63,9 +67,7 @@ module.exports = function WaiterFunc(pool) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
         
-            day.waiters = waiters;
-  
-            // console.log (day.waiters.length)
+            day.waiters = waiters
         }
         return days
     }
@@ -76,9 +78,7 @@ module.exports = function WaiterFunc(pool) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
             day.waiters = waiters;
-            // console.log(day.waiters.length)   //correct values but when returning i get the first value only??
             waiterCount=day.waiters.length 
-    console.log(waiterCount)
             // return day.waiters.length
         }
         // return waiterCount

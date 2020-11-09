@@ -49,7 +49,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         await waiterRoutes.countWaiters()
         //   console.log(waiterCount)
         const waiterCount = waiterRoutes.waiterCountFunc()
-        const count = await waiterRoutes.dayColor(waiterCount)
+        const count = await waiterRoutes.dayColor(waiterCount);
         // console.log(await waiterRoutes.waiterCounting())
         res.render('schedule',
             {

@@ -17,25 +17,29 @@
 			<a href="/"><i class="fas fa-home fa-2x "></i></a>
 		</div>
 	</div>
-{{#each counter}}
+{{!-- {{#each counter}}
 
-<p class={{this.color}}>bread bread </p>
+<p class= {{this.color}}> bread</p>
 
-{{/each}}
-	{{!-- <table class="table table-bordered table-dark">
+{{/each}} --}}
+	
+	<table class="table table-bordered table-dark">
 		<thead>
 
 			<tr scope="col">
-
+				{{!-- {{#if}} --}}
 
 				{{#each days}}
 
 
+{{#each counter}}
 
 
-				<th scope="col">
+				<th scope="col" class={{this.color}}>
 
 					{{this.dayname}}
+
+					{{/each}}
 					{{/each}}
 				</th>
 
@@ -62,7 +66,7 @@
 
 		</tbody>
 
-	</table> --}}
+	</table>
 
 	{{!-- 
 
