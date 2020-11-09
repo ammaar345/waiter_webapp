@@ -34,20 +34,27 @@
             <label for="fri" class="pl-5 px-3">Friday</label><input type="checkbox" value="Friday" name="chkDays" id="5"
                 class="">
         </div>
+<div class='msgs'>       
         	<p class="text-warning ">{{messages.inv}}</p>
 					<p class="duplicate">{{messages.dup}}</p>
 					<p class="text-success">{{messages.succ}}</p>
+                    </div> 
         <input type="submit" class="btn btn-light" value="Update shift">
         
 
      
-				
+	
 			
         </form>
 
     </div>
     </div>
     </div>
+    			<script>
+		setTimeout(function () {
+			document.querySelector(".msgs").innerHTML = "";
+		}, 5000);
+	</script>
 </body>
 
 </html>
