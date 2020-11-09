@@ -24,19 +24,19 @@ module.exports = function WaiterRoutes(waiterRoutes) {
          username = req.params.username;
       //  const
          weekday = req.body.chkDays;
-if (weekday===[]){
-req.flash('inv','Tollie')
+if (weekday===''&&username!==''){
+req.flash('inv','Please select days to work.')
 }
-else if(username!==''&& weekday!==[]){
+else if(username!==''&& weekday!==''){
 
     await waiterRoutes.countWaiters()
     
     await waiterRoutes.addUser(username, weekday);
-req.flash('succ','Bread')
+req.flash('succ','Shifts successfully updated.')
 }
-// else if (username==="" && weekday===[]){
-//     req.flash('inv','Penis')
-// }
+else if (username==="" && weekday===[]){
+    req.flash('inv','Please enter your name and select days to work.')
+}
 // else if (username===''){}
 // req.flash('inv','PP')
 
