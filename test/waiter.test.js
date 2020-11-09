@@ -110,12 +110,6 @@ describe("Should test the functions in Waiters that are returning values", funct
     assert.deepEqual(await waiter.daysNames(), []);
   })
 
-  it("returns red if the number of waiters is less than 3.", function () {
-    let waiter = Waiter(pool);
-    let waiterCount = 2
-
-    assert.equal(waiter.dayColor(waiterCount), 'red');
-  })
 
 
   it("returns orange if the number of waiters is more than 3.", async function () {
@@ -130,6 +124,13 @@ describe("Should test the functions in Waiters that are returning values", funct
     let waiter = Waiter(pool);
     let waiterCount = 3
     assert.equal(await waiter.dayColor(waiterCount), 'green');
+  })
+
+  it("returns red if the number of waiters is less than 3.",async function () {
+    let waiter = Waiter(pool);
+    let waiterCount = 2
+    assert.equal(await waiter.dayColor(waiterCount), 'red');
+  
   })
   it("should count 6 workers for monday.", async function () {
     let waiter = Waiter(pool);
@@ -162,7 +163,7 @@ describe("Should test the functions in Waiters that are returning values", funct
   it("should count 1 worker for Friday.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Timothy', ['Friday']);
-     const waiterCount = await waiter.waitersWorking(5)
+    const waiterCount = await waiter.waitersWorking(5)
     assert.equal(await waiterCount.length, 1)
 
   })

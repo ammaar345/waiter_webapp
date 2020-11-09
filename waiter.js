@@ -43,21 +43,22 @@ module.exports = function WaiterFunc(pool) {
     }
 
    async function dayColor(waiterNum) {
-        // const day = await pool.query('select * from weekdays');
-        // const days = day.rows;
-        // for (let i = 0; i < days.length; i++) {
+        const day = await pool.query('select * from weekdays');
+        const days = day.rows;
+        for (let i = 0; i < days.length; i++) {
         if (waiterNum < 3) {
             return "red"
 
         } 
-        else if (waiterNum > 3) {
+        else 
+        if (waiterNum > 3) {
             return "orange"
         }
         if (waiterNum = 3) {
             return "green"
         }
 
-    // }
+    }
 
     }
     async function dayNameList() {

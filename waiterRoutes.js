@@ -18,18 +18,27 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
     }
     async function userCreate(req, res, next) {
-        const username = req.params.username;
-        const weekday = req.body.chkDays;
+       let username='';
+       let weekday=[];
+        //const
+         username = req.params.username;
+      //  const
+         weekday = req.body.chkDays;
+if (weekday===[]){
+req.flash('inv','Tollie')
+}
+else if(username!==''&& weekday!==[]){
 
-        // console.log(weekday)
-        //    for (let i = 0; i < array.length; i++) {
-        //        const element = array[i];
-
-        //    }
-        // await waiterRoutes.waiterCount()
-        await waiterRoutes.countWaiters()
-        // console.log(await waiterRoutes.waiterCount())
-        await waiterRoutes.addUser(username, weekday);
+    await waiterRoutes.countWaiters()
+    
+    await waiterRoutes.addUser(username, weekday);
+req.flash('succ','Bread')
+}
+// else if (username==="" && weekday===[]){
+//     req.flash('inv','Penis')
+// }
+// else if (username===''){}
+// req.flash('inv','PP')
 
         res.render('employee',
             {
