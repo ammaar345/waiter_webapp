@@ -76,18 +76,22 @@ module.exports = function WaiterFunc(pool) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
             day.waiters = waiters;
-            console.log(day.waiters.length)   //correct values but when returning i get the first value only??
+            // console.log(day.waiters.length)   //correct values but when returning i get the first value only??
             waiterCount=day.waiters.length 
-            
+    console.log(waiterCount)
             // return day.waiters.length
         }
-        return waiterCount
+        // return waiterCount
         
     }
 //   async function waiterCounting(){
 //         console.log(waiterCount);
 //         return waiterCount
 //     }
+function waiterCountFunc(){
+    // console.log(waiterCount)
+return waiterCount
+}
     return {
         dayColor,
         clearDataBase,
@@ -96,6 +100,7 @@ module.exports = function WaiterFunc(pool) {
         waitersWorking,
         daysNames,
         countWaiters,
+        waiterCountFunc
         // waiterCounting
     }
 

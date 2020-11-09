@@ -22,12 +22,12 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         const weekday = req.body.chkDays;
 
         // console.log(weekday)
-    //    for (let i = 0; i < array.length; i++) {
-    //        const element = array[i];
-           
-    //    }
-    // await waiterRoutes.waiterCount()
-    await waiterRoutes.countWaiters()
+        //    for (let i = 0; i < array.length; i++) {
+        //        const element = array[i];
+
+        //    }
+        // await waiterRoutes.waiterCount()
+        await waiterRoutes.countWaiters()
         // console.log(await waiterRoutes.waiterCount())
         await waiterRoutes.addUser(username, weekday);
 
@@ -46,18 +46,18 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
     async function admin(req, res, next) {
         const days = await waiterRoutes.dayNameList();
-      const waiterCount=await waiterRoutes.countWaiters()
-    //   console.log(waiterCount)
-    // console.log(waiterCount)
-        const count= await waiterRoutes.dayColor(waiterCount)
+        await waiterRoutes.countWaiters()
+        //   console.log(waiterCount)
+        const waiterCount = waiterRoutes.waiterCountFunc()
+        const count = await waiterRoutes.dayColor(waiterCount)
         // console.log(await waiterRoutes.waiterCounting())
         res.render('schedule',
             {
                 days,
-                // counter: [{
-                //     'color': 
-                //     count
-                // }]
+                counter: [{
+                    'color':
+                        count
+                }]
             }
         )
 

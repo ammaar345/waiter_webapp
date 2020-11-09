@@ -12,18 +12,22 @@
 	{{!-- {{#each counter}}
 				<li class={{this.color}}>bread</li>
 				{{/each}} --}}
-					<div class="row">
+	<div class="row">
 		<div class="col-6 pr-4">
 			<a href="/"><i class="fas fa-home fa-2x "></i></a>
 		</div>
 	</div>
-			{{!-- 	 --}}
-				<table class="table table-bordered table-dark">
+{{#each counter}}
+
+<p class={{this.color}}>bread bread </p>
+
+{{/each}}
+	{{!-- <table class="table table-bordered table-dark">
 		<thead>
 
 			<tr scope="col">
-				
-			
+
+
 				{{#each days}}
 
 
@@ -32,9 +36,9 @@
 				<th scope="col">
 
 					{{this.dayname}}
-
+					{{/each}}
 				</th>
-				{{/each}}
+
 
 			</tr>
 
@@ -58,7 +62,7 @@
 
 		</tbody>
 
-	</table>
+	</table> --}}
 
 	{{!-- 
 
