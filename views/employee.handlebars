@@ -26,10 +26,10 @@
         </div>
 
         <div class="row d-flex justify-content-center primary ">
-            {{#each weekday}}
-            <label for="" class="pl-5 px-3 ">{{this.dayname}}</label><input type="checkbox" value="{{this.dayname}}"
-                {{this.checked}} name="chkDays" class="checkbox">
-            {{!-- <label for="tue" class="pl-5 px-3">Tuesday</label><input type="checkbox" value="Tuesday" name="chkDays"
+            
+                {{#each weekday}}
+                <label for="" class="pl-5 px-3 ">{{this.dayname}}</label><input type="checkbox" value="{{this.dayname}}"
+                {{this.checked}} name="chkDays"  class="checkbox">            {{!-- <label for="tue" class="pl-5 px-3">Tuesday</label><input type="checkbox" value="Tuesday" name="chkDays"
                 id="2" class="">
             <label for="wed" class="pl-5 px-3">Wednesday</label><input type="checkbox" value="Wednesday" name="chkDays"
                 id="3" class="">
@@ -55,9 +55,12 @@
     </div>
     </div>
     </div>
+       
     <script>
         setTimeout(function () {
-            document.querySelector(".msgs").innerHTML = "";
+       document.querySelector(".text-warning").innerHTML = "";
+            document.querySelector(".duplicate").innerHTML = "";
+            document.querySelector(".text-success").innerHTML = "";
         }, 5000);
     </script>
 </body>

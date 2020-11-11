@@ -41,6 +41,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         }
         else if (username === "" && weekday === undefined) {
             req.flash('inv', 'Please enter your name and select days to work.')
+            return 
         }
 
 
@@ -81,9 +82,9 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
     }
     async function waiterHome(req, res) {
-
+const allDays=await waiterRoutes.getAllDays()
         res.render('employee', {
-
+weekday:allDays
         })
     }
 

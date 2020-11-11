@@ -13,7 +13,7 @@
 				<li class={{this.color}}>bread</li>
 				{{/each}} --}}
 	<div class="row">
-		<div class="col-6 pr-4">
+		<div class="float-left pr-5">
 			<a href="/"><i class="fas fa-home fa-2x "></i></a>
 		</div>
 	</div>
@@ -22,24 +22,25 @@
 <p class= {{this.color}}> bread</p>
 
 {{/each}} --}}
-	
-	<table class="table table-bordered table-dark">
+	<div class='row'>
+	<table class=" table table-bordered text-light">
 		<thead>
 
-			<tr scope="col">
+			<tr scope="col-3">
 				{{!-- {{#if}} --}}
 
 				{{#each days}}
 
+{{!-- 
+{{#each counter}} --}}
 
-{{#each counter}}
 
-
-				<th scope="col" class={{this.color}}>
+				<th scope="col"> 
+					{{!-- class={{this.color} --}}
 
 					{{this.dayname}}
 
-					{{/each}}
+					{{!-- {{/each}} --}}
 					{{/each}}
 				</th>
 
@@ -67,7 +68,7 @@
 		</tbody>
 
 	</table>
-
+</div>
 	{{!-- 
 
 

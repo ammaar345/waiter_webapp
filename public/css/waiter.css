@@ -8,3 +8,31 @@ background-color: red;}
 .orange{color: orange;
 
 background-color: orange;}
+/* input[type="checkbox"]{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkbox{
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color:black}
+    input:checked ~ .checkbox:after {
+        display: block;
+      }
+      .checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.container input:checked ~ .checkbox:after {
+    display: block;
+  }
+  /* When the checkbox is checked, add a blue background */
+/* .container input:checked ~ .checkbox {
+  background-color: #2196F3;
+} */ 
