@@ -10,51 +10,56 @@
 <body>
     <div class="container ">
         <div class="d-flex justify-content-center">
-            <h1>Waiter Availability</h1>
+            <div class="navbar navbar-expand-lg navbar-light bg-dark ">
+
+                <h1 class="text-light">Bob the Builder's Cafe</h1>
+            </div>
         </div>
         <a href="/"><i class="fas fa-home fa-2x"></i></a>
         <div class="d-flex justify-content-center p-4">
             {{#each user}}
             <form action="/waiters/{{this.name}}" method="POST">
 
-                <p>Hi {{this.name}}</p>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                <p>Hi {{this.name}}</p>
 
                 {{/each}}
         </div>
 
         <div class="row d-flex justify-content-center primary ">
-            <label for="" class="pl-5 px-3 ">Monday</label><input type="checkbox" value="Monday" name="chkDays"
-                 class="checkbox">
-            <label for="tue" class="pl-5 px-3">Tuesday</label><input type="checkbox" value="Tuesday" name="chkDays"
+            {{#each weekday}}
+            <label for="" class="pl-5 px-3 ">{{this.dayname}}</label><input type="checkbox" value="{{this.dayname}}"
+                {{this.checked}} name="chkDays" class="checkbox">
+            {{!-- <label for="tue" class="pl-5 px-3">Tuesday</label><input type="checkbox" value="Tuesday" name="chkDays"
                 id="2" class="">
             <label for="wed" class="pl-5 px-3">Wednesday</label><input type="checkbox" value="Wednesday" name="chkDays"
                 id="3" class="">
             <label for="thurs" class="pl-5 px-3">Thursday</label><input type="checkbox" value="Thursday" name="chkDays"
                 id="4" class="">
             <label for="fri" class="pl-5 px-3">Friday</label><input type="checkbox" value="Friday" name="chkDays" id="5"
-                class="">
+                class=""> --}}
+            {{/each}}
         </div>
-<div class='msgs'>       
-        	<p class="text-warning ">{{messages.inv}}</p>
-					<p class="duplicate">{{messages.dup}}</p>
-					<p class="text-success">{{messages.succ}}</p>
-                    </div> 
+        <div class='msgs'>
+            <p class="text-warning ">{{messages.inv}}</p>
+            <p class="duplicate">{{messages.dup}}</p>
+            <p class="text-success">{{messages.succ}}</p>
+        </div>
         <input type="submit" class="btn btn-light" value="Update shift">
-        
 
-     
-	
-			
+
+
+
+
         </form>
 
     </div>
     </div>
     </div>
-    			<script>
-		setTimeout(function () {
-			document.querySelector(".msgs").innerHTML = "";
-		}, 5000);
-	</script>
+    <script>
+        setTimeout(function () {
+            document.querySelector(".msgs").innerHTML = "";
+        }, 5000);
+    </script>
 </body>
 
 </html>

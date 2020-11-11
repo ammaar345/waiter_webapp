@@ -13,13 +13,13 @@ const Pool = pg.Pool;
 const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/waiters';
 
 const pool = new Pool({
-    connectionString
+  connectionString
 });
 
 const Waiter = require("./waiter");
-const WaiterRoutes=require('./waiterRoutes');
+const WaiterRoutes = require('./waiterRoutes');
 const waiter = Waiter(pool);
-const waiterRoutes=WaiterRoutes(waiter);
+const waiterRoutes = WaiterRoutes(waiter);
 
 
 app.use(session({
@@ -36,12 +36,11 @@ app.engine('handlebars', exphbs({
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.get('/',waiterRoutes.home)
-app.get('/waiters/',waiterRoutes.waiterHome)
-app.post("/waiters/:username",waiterRoutes.userCreate)
- app.get("/waiters/:username",waiterRoutes.getWaiter)
-
- app.get("/days",waiterRoutes.admin)
+app.get('/', waiterRoutes.home)
+app.get('/waiters/', waiterRoutes.waiterHome)
+app.post("/waiters/:username", waiterRoutes.userCreate)
+app.get("/waiters/:username", waiterRoutes.getWaiter)
+app.get("/days", waiterRoutes.admin)
 const PORT = process.env.PORT || 2009;
 app.listen(PORT, function () {
   console.log("App started at port :", PORT);

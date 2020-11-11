@@ -39,26 +39,45 @@ module.exports = function WaiterFunc(pool) {
     LEFT JOIN weekdays
     ON weekdays.id=tblshift.weekdayid
     where weekdays.id=$1` , [day])
-        return waiterNames.rows//no structure to really show which day he /she is working
+        return waiterNames.rows;
     }
+    // SELECT  weekdays.dayname AS Weekday
+    // FROM weekdays
+    // LEFT JOIN tblshift
+    // ON weekdays.id= tblshift.weekdayid 
+    // left join waiters
+    // on waiters.id=tblshift.waiternameid
+    // where waiters.name='Ammaar'
 
-   async function dayColor(waiterNum) {
+    //     async function daysWorking(name) {
+    //         const daysWorking = await pool.query(`  SELECT  weekdays.dayname AS Weekday
+    // FROM weekdays
+    // LEFT JOIN tblshift
+    // ON weekdays.id= tblshift.weekdayid 
+    // left join waiters
+    // on waiters.id=tblshift.waiternameid
+    // where waiters.name=$1
+
+    // `, [name]);
+    //         return daysWorking.rows;
+    //     }
+    async function dayColor(waiterNum) {
         const day = await pool.query('select * from weekdays');
         const days = day.rows;
         for (let i = 0; i < days.length; i++) {
-        if (waiterNum < 3) {
-            return "red"
+            if (waiterNum < 3) {
+                return "red"
 
-        } 
-        else 
-        if (waiterNum > 3) {
-            return "orange"
-        }
-        if (waiterNum = 3) {
-            return "green"
-        }
+            }
+            else
+                if (waiterNum > 3) {
+                    return "orange"
+                }
+            if (waiterNum = 3) {
+                return "green"
+            }
 
-    }
+        }
 
     }
     async function dayNameList() {
@@ -67,7 +86,7 @@ module.exports = function WaiterFunc(pool) {
         for (let i = 0; i < days.length; i++) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
-        
+
             day.waiters = waiters
         }
         return days
@@ -79,20 +98,63 @@ module.exports = function WaiterFunc(pool) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
             day.waiters = waiters;
-            waiterCount=day.waiters.length 
+            waiterCount = day.waiters.length
             // return day.waiters.length
         }
         // return waiterCount
-        
+
     }
-//   async function waiterCounting(){
-//         console.log(waiterCount);
-//         return waiterCount
-//     }
-function waiterCountFunc(){
-    // console.log(waiterCount)
-return waiterCount
-}
+    async function getAllDays() {
+        const daysOfWeek = await pool.query('SELECT dayname FROM Weekdays')
+        return daysOfWeek.rows;
+    }
+    function waiterCountFunc() {
+        return waiterCount
+    }
+
+    async function checkedDays(waiter) {
+        var waiterSelected = await pool.query('Select name from waiters where name=$1', [waiter])
+        const allWaiters = await pool.query('Select name from waiters');
+        var waitersWorkingDays = await pool.query(`  SELECT  weekdays.dayname AS Weekday
+        FROM weekdays
+        LEFT JOIN tblshift
+        ON weekdays.id= tblshift.weekdayid 
+        left join waiters
+        on waiters.id=tblshift.waiternameid
+        where waiters.name=$1
+        
+        `, [waiter]);
+        const waiterName = waiterSelected.rows;
+        const allWaiterNames = allWaiters.rows;
+        const allDays = await getAllDays()
+        // var waitersWorkingDays = await daysWorking(waiter);
+
+        const days = waitersWorkingDays.rows;
+        console.log(waiterName)
+        if (days.rowCount === 0) {
+            return allDays;
+        }
+
+
+        else {
+
+            for (day of allDays) {
+                waitersWorkingDays
+                for (waiterSelected of days) {
+
+                    if (waiterSelected.weekday == day.dayname) {
+                        day.checked = "checked";
+                    }
+
+
+                }
+            }
+            console.log({ allDays })
+            console.log(days)
+            return allDays;
+        }
+        // return waitersWorkingDays
+    }
     return {
         dayColor,
         clearDataBase,
@@ -101,7 +163,10 @@ return waiterCount
         waitersWorking,
         daysNames,
         countWaiters,
-        waiterCountFunc
+        waiterCountFunc,
+        getAllDays,
+        // daysWorking,
+        checkedDays
         // waiterCounting
     }
 
