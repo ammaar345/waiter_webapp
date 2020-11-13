@@ -14,6 +14,7 @@ module.exports = function WaiterFunc(pool) {
         }
         await pool.query(DELETE_QUERY, [waiter.rows[0].id])
         for (const day of week) {
+            // console.log(day);
             const INSERT_QUERY2 = 'insert into tblshift (weekdayid,waiternameid) values ($1,$2)'
             const weekdayID = await pool.query('SELECT id from weekdays where dayname=($1)', [day]);
             await pool.query(INSERT_QUERY2, [weekdayID.rows[0].id, waiter.rows[0].id])
@@ -61,32 +62,35 @@ module.exports = function WaiterFunc(pool) {
     // `, [name]);
     //         return daysWorking.rows;
     //     }
-    async function dayColor(waiterNum) {
-        const day = await pool.query('select * from weekdays');
-        const days = day.rows;
-        for (let i = 0; i < days.length; i++) {
-            if (waiterNum < 3) {
-                return "red"
+    // async function dayColor(waiterNum) {
+    //     const day = await pool.query('select dayname from weekdays');
+    //     var color = "";
+    //     const days = day.rows;
+    //     for (let i = 0; i < days.length; i++) {
+    //         if (waiterNum < 3) {
+    //             color = "red"
+    //             // console.log(days)
+    //         }
+    //         else
+    //             if (waiterNum > 3) {
+    //                 color = "orange"
+    //             }
+    //         if (waiterNum == 3) {
+    //             color = "green"
+    //         }
 
-            }
-            else
-                if (waiterNum > 3) {
-                    return "orange"
-                }
-            if (waiterNum = 3) {
-                return "green"
-            }
+    //     }
+    //     // console.log(color)
+    //     return color
 
-        }
-
-    }
+    // }
     async function dayNameList() {
         const dayObjs = await pool.query('select * from weekdays');
         const days = dayObjs.rows;
         for (let i = 0; i < days.length; i++) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
-
+            // dayColor(waiters)
             day.waiters = waiters
         }
         return days
@@ -98,19 +102,40 @@ module.exports = function WaiterFunc(pool) {
             const day = days[i];
             const waiters = await waitersWorking(day.id)
             day.waiters = waiters;
-            waiterCount = day.waiters.length
-            // return day.waiters.length
-        }
-        // return waiterCount
+            day.count = waiters.length;
+            // var waiterCount
+            // var waiterCount = day.waiters.length
+            // console.log(waiterCount)
+            if (day.count < 3) {
+                day.color = 'red'
+            }
+         else   if (day.count > 3) {
+                day.color = 'orange'
+            }
+          else  if (day.count == 3) {
+                day.color = 'green'
+            }
 
+
+        }
+        // console.log(days)
+        return days
+        // console.log({days})
+        // console.log(waiterCount)    
+        // return day.waiters.length
     }
+
+
+    // return waiterCount
+
     async function getAllDays() {
         const daysOfWeek = await pool.query('SELECT dayname FROM Weekdays')
         return daysOfWeek.rows;
     }
-    function waiterCountFunc() {
-        return waiterCount
-    }
+    // function waiterCountFunc() {
+
+    //     return waiterCount
+    // }
 
     async function checkedDays(waiter) {
         var waiterSelected = await pool.query('Select name from waiters where name=$1', [waiter])
@@ -130,7 +155,7 @@ module.exports = function WaiterFunc(pool) {
         // var waitersWorkingDays = await daysWorking(waiter);
 
         const days = waitersWorkingDays.rows;
-        console.log(waiterName)
+        // console.log(waiterName)
         if (days.rowCount === 0) {
             return allDays;
         }
@@ -149,21 +174,21 @@ module.exports = function WaiterFunc(pool) {
 
                 }
             }
-            console.log({ allDays })
-            console.log(days)
+            // console.log({ allDays })
+            // console.log(days)
             return allDays;
         }
         // return waitersWorkingDays
     }
     return {
-        dayColor,
+        // dayColor,
         clearDataBase,
         addUser,
         dayNameList,
         waitersWorking,
         daysNames,
         countWaiters,
-        waiterCountFunc,
+        // waiterCountFunc,
         getAllDays,
         // daysWorking,
         checkedDays

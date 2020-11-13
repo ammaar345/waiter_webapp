@@ -120,18 +120,18 @@ describe("Should test the functions in Waiters that are returning values", funct
     ), 'orange');
   })
 
-  it("returns green if the number of waiters is equal to 3.", async function () {
-    let waiter = Waiter(pool);
-    let waiterCount = 3
-    assert.equal(await waiter.dayColor(waiterCount), 'green');
-  })
+  // it("returns green if the number of waiters is equal to 3.", async function () {
+  //   let waiter = Waiter(pool);
+  //   let waiterCount = 3
+  //   assert.equal(await waiter.dayColor(waiterCount), 'green');
+  // })
 
-  it("returns red if the number of waiters is less than 3.",async function () {
-    let waiter = Waiter(pool);
-    let waiterCount = 2
-    assert.equal(await waiter.dayColor(waiterCount), 'red');
+  // it("returns red if the number of waiters is less than 3.",async function () {
+  //   let waiter = Waiter(pool);
+  //   let waiterCount = 2
+  //   assert.equal(await waiter.dayColor(waiterCount), 'red');
   
-  })
+  // })
   it("should count 6 workers for monday.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Ammaar', ['Monday']);

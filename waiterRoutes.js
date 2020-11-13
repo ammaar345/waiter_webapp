@@ -63,19 +63,27 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
 
     async function admin(req, res, next) {
-        const days = await waiterRoutes.dayNameList();
-        await waiterRoutes.countWaiters()
-        //   console.log(waiterCount)
-        const waiterCount = waiterRoutes.waiterCountFunc()
-        const count = await waiterRoutes.dayColor(waiterCount);
+ 
+        // const waiterCount = waiterRoutes.waiterCountFunc()
+        const days =await waiterRoutes.countWaiters() //await waiterRoutes.dayNameList();
+    // console.log(await waiterRoutes.countWaiters())
+    //    const countColor=waiterRoutes.dayColor(waiterCount)
+    //     //   console.log(waiterCount)
+    //   console.log(waiterCount)
+        // const count = await waiterRoutes.dayColor(waiterCount);
         // console.log(await waiterRoutes.waiterCounting())
+
         res.render('schedule',
             {
                 days,
-                counter: [{
-                    'color':
-                        count
-                }]
+            
+                // waiterCount:[{
+                //     'color' :countColor
+                // }]
+                // days: [{
+                //     'color':
+                //         count
+                // }]
             }
         )
 
@@ -87,13 +95,18 @@ const allDays=await waiterRoutes.getAllDays()
 weekday:allDays
         })
     }
+async function reset (req,res){
+    waiterRoutes.clearDataBase()
+    res.render  ('index',{
 
+    })
+}
     return {
         getWaiter,
         userCreate,
         home,
         admin,
-        waiterHome
-
+        waiterHome,
+        reset
     }
 }
