@@ -8,13 +8,12 @@ module.exports = function WaiterFunc(pool) {
         const DELETE_QUERY = 'delete from tblshift where waiternameid=$1'
         if (waiter.rows.length === 0) {
 
-
             await pool.query(INSERT_QUERY, [user])
             waiter = await pool.query('select id from waiters where name=($1)', [user]);
         }
         await pool.query(DELETE_QUERY, [waiter.rows[0].id])
+        
         for (const day of week) {
-            // console.log(day);
             const INSERT_QUERY2 = 'insert into tblshift (weekdayid,waiternameid) values ($1,$2)'
             const weekdayID = await pool.query('SELECT id from weekdays where dayname=($1)', [day]);
             await pool.query(INSERT_QUERY2, [weekdayID.rows[0].id, waiter.rows[0].id])
@@ -107,13 +106,13 @@ module.exports = function WaiterFunc(pool) {
             // var waiterCount = day.waiters.length
             // console.log(waiterCount)
             if (day.count < 3) {
-                day.color = 'red'
+                day.color = 'bg-danger'
             }
          else   if (day.count > 3) {
-                day.color = 'orange'
+                day.color = 'bg-warning'
             }
           else  if (day.count == 3) {
-                day.color = 'green'
+                day.color = 'bg-success'
             }
 
 
@@ -184,7 +183,7 @@ module.exports = function WaiterFunc(pool) {
         // dayColor,
         clearDataBase,
         addUser,
-        dayNameList,
+        // dayNameList,
         waitersWorking,
         daysNames,
         countWaiters,
