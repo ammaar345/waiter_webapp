@@ -89,6 +89,14 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
 
     }
+    async function adminUpdate(req,res){
+
+        const days =await waiterRoutes.countWaiters();
+        res.render('employee',{
+// daysNames
+
+        })
+    }
     async function waiterHome(req, res) {
 const allDays=await waiterRoutes.getAllDays()
         res.render('employee', {

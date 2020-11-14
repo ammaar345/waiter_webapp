@@ -77,6 +77,23 @@
 
 
 	</form>
+
+	<form action="/updateUser" method="post">
+	<div class="row p-4">
+	<div class="float-left"	>
+<input type="text" name="waiter" class="" placeholder="Enter waiter" id="" class="">
+ {{#each weekday}}
+                <label for="" class="pl-5 px-3 ">{{this.dayname}}</label><input type="checkbox" value="{{this.dayname}}"
+                {{this.checked}} name="chkDays"  class="checkbox">
+</div>
+<div class="col-sm">
+<input type="submit" value="Update waiter" class=" btn btn-light">
+</div>
+</div>
+
+</form>
+
+
 	<div class='row'>
 		<form action="/reset" method="get">
 <input type="submit" value="Reset" class="btn btn-light">
