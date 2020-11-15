@@ -22,12 +22,6 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     async function userCreate(req, res, next) {
         const username = req.params.username;
         const weekday = req.body.chkDays;
-        const allDays = await waiterRoutes.checkedDays(username)
-        // console.log(weekday)
-        //  if (username===''){
-        //      req.flash('inv','Enter a username.')
-        //  }
-        //  else 
         if (weekday === undefined && username !== '') {
             req.flash('inv', 'Please select days to work.')
         }
@@ -36,14 +30,14 @@ module.exports = function WaiterRoutes(waiterRoutes) {
             await waiterRoutes.countWaiters()
 
             await waiterRoutes.addUser(username, weekday);
-
+          
             req.flash('succ', 'Shifts successfully updated.')
         }
         else if (username === "" && weekday === undefined) {
             req.flash('inv', 'Please enter your name and select days to work.')
             return 
         }
-
+        const allDays = await waiterRoutes.checkedDays(username)
 
         // console.log(username)
         // else 
@@ -72,7 +66,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     //   console.log(waiterCount)
         // const count = await waiterRoutes.dayColor(waiterCount);
         // console.log(await waiterRoutes.waiterCounting())
-
+       
         res.render('schedule',
             {
                 days,
@@ -90,13 +84,32 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
     }
     async function adminUpdate(req,res){
+       
+        const username = req.body.waiter;
+        const weekday = req.body.daysAdmin;
+        console.log(username)
+        if (weekday === undefined && username !== '') {
+            req.flash('inv', 'Please select days to work.')
+        }
+        else if (username !== '' && weekday !== undefined) {
 
-        const days =await waiterRoutes.countWaiters();
-        res.render('employee',{
-// daysNames
+            await waiterRoutes.countWaiters()
+
+            await waiterRoutes.addUser(username, weekday);
+          
+            req.flash('succ', 'Shifts successfully updated.')
+        }
+        else if (username === "" && weekday === undefined) {
+            req.flash('inv', 'Please enter your name and select days to work.')
+            return 
+        }
+        const days =await waiterRoutes.countWaiters()
+        res.render('schedule',{
+days
 
         })
     }
+
     async function waiterHome(req, res) {
 const allDays=await waiterRoutes.getAllDays()
         res.render('employee', {
@@ -104,7 +117,7 @@ weekday:allDays
         })
     }
 async function reset (req,res){
-    waiterRoutes.clearDataBase()
+   await waiterRoutes.clearDataBase()
     res.render  ('index',{
 
     })
@@ -115,6 +128,7 @@ async function reset (req,res){
         home,
         admin,
         waiterHome,
-        reset
+        reset,
+        adminUpdate
     }
 }
