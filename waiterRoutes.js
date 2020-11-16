@@ -57,16 +57,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
 
     async function admin(req, res, next) {
- 
-        // const waiterCount = waiterRoutes.waiterCountFunc()
         const days =await waiterRoutes.countWaiters() //await waiterRoutes.dayNameList();
-    // console.log(await waiterRoutes.countWaiters())
-    //    const countColor=waiterRoutes.dayColor(waiterCount)
-    //     //   console.log(waiterCount)
-    //   console.log(waiterCount)
-        // const count = await waiterRoutes.dayColor(waiterCount);
-        // console.log(await waiterRoutes.waiterCounting())
-       
         res.render('schedule',
             {
                 days,

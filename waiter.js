@@ -1,5 +1,4 @@
 module.exports = function WaiterFunc(pool) {
-    let waiterCount
     async function addUser(user, week) {
         const SELECT_QUERY = 'SELECT id FROM waiters where name=($1)';
 
@@ -12,7 +11,7 @@ module.exports = function WaiterFunc(pool) {
             waiter = await pool.query('select id from waiters where name=($1)', [user]);
         }
         await pool.query(DELETE_QUERY, [waiter.rows[0].id])
-        
+
         for (const day of week) {
             const INSERT_QUERY2 = 'insert into tblshift (weekdayid,waiternameid) values ($1,$2)'
             const weekdayID = await pool.query('SELECT id from weekdays where dayname=($1)', [day]);
@@ -41,59 +40,18 @@ module.exports = function WaiterFunc(pool) {
     where weekdays.id=$1` , [day])
         return waiterNames.rows;
     }
-    // SELECT  weekdays.dayname AS Weekday
-    // FROM weekdays
-    // LEFT JOIN tblshift
-    // ON weekdays.id= tblshift.weekdayid 
-    // left join waiters
-    // on waiters.id=tblshift.waiternameid
-    // where waiters.name='Ammaar'
 
-    //     async function daysWorking(name) {
-    //         const daysWorking = await pool.query(`  SELECT  weekdays.dayname AS Weekday
-    // FROM weekdays
-    // LEFT JOIN tblshift
-    // ON weekdays.id= tblshift.weekdayid 
-    // left join waiters
-    // on waiters.id=tblshift.waiternameid
-    // where waiters.name=$1
-
-    // `, [name]);
-    //         return daysWorking.rows;
-    //     }
-    // async function dayColor(waiterNum) {
-    //     const day = await pool.query('select dayname from weekdays');
-    //     var color = "";
-    //     const days = day.rows;
+    // async function dayNameList() {
+    //     const dayObjs = await pool.query('select * from weekdays');
+    //     const days = dayObjs.rows;
     //     for (let i = 0; i < days.length; i++) {
-    //         if (waiterNum < 3) {
-    //             color = "red"
-    //             // console.log(days)
-    //         }
-    //         else
-    //             if (waiterNum > 3) {
-    //                 color = "orange"
-    //             }
-    //         if (waiterNum == 3) {
-    //             color = "green"
-    //         }
-
+    //         const day = days[i];
+    //         const waiters = await waitersWorking(day.id)
+    //         // dayColor(waiters)
+    //         day.waiters = waiters
     //     }
-    //     // console.log(color)
-    //     return color
-
+    //     return days
     // }
-    async function dayNameList() {
-        const dayObjs = await pool.query('select * from weekdays');
-        const days = dayObjs.rows;
-        for (let i = 0; i < days.length; i++) {
-            const day = days[i];
-            const waiters = await waitersWorking(day.id)
-            // dayColor(waiters)
-            day.waiters = waiters
-        }
-        return days
-    }
     async function countWaiters() {
         const dayObjs = await pool.query('select * from weekdays');
         const days = dayObjs.rows;
@@ -108,33 +66,21 @@ module.exports = function WaiterFunc(pool) {
             if (day.count < 3) {
                 day.color = 'bg-danger'
             }
-         else   if (day.count > 3) {
+            else if (day.count > 3) {
                 day.color = 'bg-warning'
             }
-          else  if (day.count == 3) {
+            else if (day.count == 3) {
                 day.color = 'bg-success'
             }
 
 
         }
-        // console.log(days)
         return days
-        // console.log({days})
-        // console.log(waiterCount)    
-        // return day.waiters.length
     }
-
-
-    // return waiterCount
-
     async function getAllDays() {
         const daysOfWeek = await pool.query('SELECT dayname FROM Weekdays')
         return daysOfWeek.rows;
     }
-    // function waiterCountFunc() {
-
-    //     return waiterCount
-    // }
 
     async function checkedDays(waiter) {
         var waiterSelected = await pool.query('Select name from waiters where name=$1', [waiter])
@@ -148,20 +94,14 @@ module.exports = function WaiterFunc(pool) {
         where waiters.name=$1
         
         `, [waiter]);
-        const waiterName = waiterSelected.rows;
-        const allWaiterNames = allWaiters.rows;
         const allDays = await getAllDays()
-        // var waitersWorkingDays = await daysWorking(waiter);
 
         const days = waitersWorkingDays.rows;
         // console.log(waiterName)
         if (days.rowCount === 0) {
             return allDays;
         }
-
-
         else {
-
             for (day of allDays) {
                 waitersWorkingDays
                 for (waiterSelected of days) {
@@ -169,29 +109,20 @@ module.exports = function WaiterFunc(pool) {
                     if (waiterSelected.weekday == day.dayname) {
                         day.checked = "checked";
                     }
-
-
                 }
             }
-            // console.log({ allDays })
-            // console.log(days)
             return allDays;
         }
-        // return waitersWorkingDays
     }
     return {
-        // dayColor,
         clearDataBase,
         addUser,
-        // dayNameList,
         waitersWorking,
         daysNames,
         countWaiters,
-        // waiterCountFunc,
         getAllDays,
-        // daysWorking,
         checkedDays
-        // waiterCounting
+
     }
 
 }

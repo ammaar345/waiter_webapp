@@ -28,7 +28,7 @@ describe("Should test the functions in Waiters that are returning values", funct
   it("Should add the day ID of Monday , Tuesday and Wednesday as well as the waiter ID into the database.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Ammaar', ['Monday', 'Tuesday', 'Wednesday']);
-    assert.deepEqual(await waiter.daysNames(), [
+    assert.deepStrictEqual(await waiter.daysNames(), [
       {
         waiternameid: 1,
         weekdayid: 1
@@ -47,7 +47,7 @@ describe("Should test the functions in Waiters that are returning values", funct
   it("Should add the day ID of Wednesday , Thursday and Friday as well as the waiter ID into the database.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Thomas', ['Wednesday', 'Thursday', 'Friday',]);
-    assert.deepEqual(await waiter.daysNames(), [
+    assert.deepStrictEqual(await waiter.daysNames(), [
       {
         waiternameid: 1,
         weekdayid: 3
@@ -68,7 +68,7 @@ describe("Should test the functions in Waiters that are returning values", funct
   it("Should add the day ID of Friday , Monday and Tuesday as well as the waiter ID into the database.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Joe', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
-    assert.deepEqual(await waiter.daysNames(), [
+    assert.deepStrictEqual(await waiter.daysNames(), [
       {
         waiternameid: 1,
         weekdayid: 5
@@ -93,7 +93,7 @@ describe("Should test the functions in Waiters that are returning values", funct
     await waiter.addUser('Ammaar', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
     await waiter.addUser('Joe', ['Tuesday', 'Monday', 'Tuesday', 'Wednesday']);
     await waiter.clearDataBase();
-    assert.deepEqual(await waiter.daysNames(), [])
+    assert.deepStrictEqual(await waiter.daysNames(), [])
   })
   it("tests if the database clears three datasets.", async function () {
     let waiter = Waiter(pool);
@@ -101,57 +101,23 @@ describe("Should test the functions in Waiters that are returning values", funct
     await waiter.addUser('Joe', ['Tuesday', 'Monday', 'Friday']);
     await waiter.addUser('Henry', ['Monday', 'Friday']);
     await waiter.clearDataBase();
-    assert.deepEqual(await waiter.daysNames(), [])
+    assert.deepStrictEqual(await waiter.daysNames(), [])
   })
   it("tests if the database clears one dataset.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Jenna', ['Friday', 'Monday', 'Tuesday', 'Wednesday']);
     await waiter.clearDataBase();
-    assert.deepEqual(await waiter.daysNames(), []);
+    assert.deepStrictEqual(await waiter.daysNames(), []);
   })
 
 
 
-  it("returns orange if the number of waiters is more than 3.", async function () {
-    let waiter = Waiter(pool);
-    let waiterCount = 4
 
-    assert.equal(await waiter.dayColor(waiterCount
-    ), 'orange');
-  })
-  it("returns orange if the number of waiters is more than 3.", async function () {
-    let waiter = Waiter(pool);
-    let waiterCount = 4
-
-    assert.equal(await waiter.dayColor(waiterCount
-    ), 'orange');
-  })
-
-  it("returns orange if the number of waiters is more than 3.", async function () {
-    let waiter = Waiter(pool);
-    let waiterCount = 4
-
-    assert.equal(await waiter.dayColor(waiterCount
-    ), 'orange');
-  })
-
-  // it("returns green if the number of waiters is equal to 3.", async function () {
-  //   let waiter = Waiter(pool);
-  //   let waiterCount = 3
-  //   assert.equal(await waiter.dayColor(waiterCount), 'green');
-  // })
-
-  // it("returns red if the number of waiters is less than 3.",async function () {
-  //   let waiter = Waiter(pool);
-  //   let waiterCount = 2
-  //   assert.equal(await waiter.dayColor(waiterCount), 'red');
-  
-  // })
   it("should count 1 worker for Friday.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Timothy', ['Friday']);
     const waiterCount = await waiter.waitersWorking(5)
-    assert.equal(await waiterCount.length, 1)
+    assert.deepStrictEqual(await waiterCount.length, 1)
 
   })
   it("should count 6 workers for monday.", async function () {
@@ -163,7 +129,7 @@ describe("Should test the functions in Waiters that are returning values", funct
     await waiter.addUser('Low', ['Monday',]);
     await waiter.addUser('Lee', ['Monday',]);
     const waiterCount = await waiter.waitersWorking(1)
-    assert.equal(await waiterCount.length, 6)
+    assert.deepStrictEqual(await waiterCount.length, 6)
 
   })
   it("should count 2 workers for Tuesday.", async function () {
@@ -171,7 +137,7 @@ describe("Should test the functions in Waiters that are returning values", funct
     await waiter.addUser('Ammaar', ['Tuesday']);
     await waiter.addUser('Joe', ['Tuesday']);
     const waiterCount = await waiter.waitersWorking(2)
-    assert.equal(await waiterCount.length, 2)
+    assert.deepStrictEqual(await waiterCount.length, 2)
 
   })
   it("should count 3 workers for Wednesday.", async function () {
@@ -179,13 +145,177 @@ describe("Should test the functions in Waiters that are returning values", funct
     await waiter.addUser('Jody', ['Wednesday']);
     await waiter.addUser('Ester', ['Wednesday']);
     const waiterCount = await waiter.waitersWorking(3)
-    assert.equal(await waiterCount.length, 2)
+    assert.deepStrictEqual(await waiterCount.length, 2)
+
+  })
+  it("should return object with success color for wednesday , and danger color  for the rest of the week as well as ,names and count for each day of the week.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Joy', ['Wednesday']);
+    await waiter.addUser('Yugi', ['Wednesday']);
+    await waiter.addUser('Jube', ['Wednesday']);
+    await waiter.addUser('Taybah', ['Thursday']);
+    await waiter.addUser('Naruto', ['Thursday']);
+    await waiter.addUser('Tom', ['Monday']);
+    const waiterCount = await waiter.countWaiters()
+    assert.deepStrictEqual(waiterCount,
+      [
+        {
+          color: 'bg-danger',
+          count: 1,
+          dayname: 'Monday',
+          id: 1,
+          waiters: [{ name: 'Tom' }, { name: 'Joy' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 0,
+          dayname: 'Tuesday',
+          id: 2,
+          waiters: []
+        },
+        {
+          color: 'bg-success',
+          count: 3,
+          dayname: 'Wednesday',
+          id: 3,
+          waiters: [{ name: 'Joy' }, { name: 'Yugi' }, { name: 'Jube' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 2,
+          dayname: 'Thursday',
+          id: 4,
+          waiters: [{ name: 'Taybah' }, { name: 'Naruto' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 0,
+          dayname: 'Friday',
+          id: 5,
+          waiters: []
+        }
+
+
+
+
+      ]
+
+    )
+
+
+  })
+  it("should return object with warning color for wednesday , and danger color  for the rest of the week as well as ,names and count for each day of the week.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Joy', ['Monday', 'Tuesday', 'Wednesday']);
+    await waiter.addUser('Yugi', ['Monday']);
+    await waiter.addUser('Jube', ['Monday']);
+    await waiter.addUser('Taybah', ['Monday']);
+    await waiter.addUser('Naruto', ['Tuesday', 'Wednesday']);
+    const waiterCount = await waiter.countWaiters()
+    assert.deepStrictEqual(waiterCount,
+      [
+        {
+          color: 'bg-warning',
+          count: 4,
+          dayname: 'Monday',
+          id: 1,
+          waiters: [{ name: 'Joy' }, { name: 'Yugi' }, { name: 'Jube' }, { name: 'Taybah' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 2,
+          dayname: 'Tuesday',
+          id: 2,
+          waiters: [{ name: 'Joy' }, { name: 'Naruto' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 2,
+          dayname: 'Wednesday',
+          id: 3,
+          waiters: [{ name: 'Joy' }, { name: 'Naruto' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 0,
+          dayname: 'Thursday',
+          id: 4,
+          waiters: []
+        },
+        {
+          color: 'bg-danger',
+          count: 0,
+          dayname: 'Friday',
+          id: 5,
+          waiters: []
+        }
+
+
+
+
+      ]
+
+    )
+
+
+  })
+  it("should return object with success color for Friday , and danger color  for the rest of the week as well as ,names and count for each day of the week.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Lucy', ['Wednesday', 'Friday']);
+    await waiter.addUser('Johnny', ['Monday', 'Friday']);
+    await waiter.addUser('Connor', ['Tuesday', 'Friday']);
+    const waiterCount = await waiter.countWaiters();
+    assert.deepStrictEqual(waiterCount,
+      [
+        {
+          color: 'bg-danger',
+          count: 1,
+          dayname: 'Monday',
+          id: 1,
+          waiters: [{ name: 'Johnny' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 1,
+          dayname: 'Tuesday',
+          id: 2,
+          waiters: [{ name: 'Connor' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 1,
+          dayname: 'Wednesday',
+          id: 3,
+          waiters: [{ name: 'Lucy' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 0,
+          dayname: 'Thursday',
+          id: 4,
+          waiters: []
+        },
+        {
+          color: 'bg-success',
+          count: 3,
+          dayname: 'Friday',
+          id: 5,
+          waiters: [{ name: 'Lucy' }, { name: 'Johnny' }, { name: 'Connor' }]
+        }
+
+
+
+
+      ]
+
+    )
+
 
   })
 
-  after(function(){
+  after(function () {
     pool.end();
-})
+  })
 
 })
 
