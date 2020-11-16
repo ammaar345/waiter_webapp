@@ -204,114 +204,114 @@ describe("Should test the functions in Waiters that are returning values", funct
 
 
   })
-  // it("should return object with warning color for wednesday , and danger color  for the rest of the week as well as ,names and count for each day of the week.", async function () {
-  //   let waiter = Waiter(pool);
-  //   await waiter.addUser('Joy', ['Monday', 'Tuesday', 'Wednesday']);
-  //   await waiter.addUser('Yugi', ['Monday']);
-  //   await waiter.addUser('Jube', ['Monday']);
-  //   await waiter.addUser('Taybah', ['Monday']);
-  //   await waiter.addUser('Naruto', ['Tuesday', 'Wednesday']);
-  //   const waiterCount = await waiter.countWaiters()
-  //   assert.deepStrictEqual(waiterCount,
-  //     [
-  //       {
-  //         color: 'bg-warning',
-  //         count: 4,
-  //         dayname: 'Monday',
-  //         id: 1,
-  //         waiters: [{ name: 'Joy' }, { name: 'Yugi' }, { name: 'Jube' }, { name: 'Taybah' }]
-  //       },
-  //       {
-  //         color: 'bg-danger',
-  //         count: 2,
-  //         dayname: 'Tuesday',
-  //         id: 2,
-  //         waiters: [{ name: 'Joy' }, { name: 'Naruto' }]
-  //       },
-  //       {
-  //         color: 'bg-danger',
-  //         count: 2,
-  //         dayname: 'Wednesday',
-  //         id: 3,
-  //         waiters: [{ name: 'Joy' }, { name: 'Naruto' }]
-  //       },
-  //       {
-  //         color: 'bg-danger',
-  //         count: 0,
-  //         dayname: 'Thursday',
-  //         id: 4,
-  //         waiters: []
-  //       },
-  //       {
-  //         color: 'bg-danger',
-  //         count: 0,
-  //         dayname: 'Friday',
-  //         id: 5,
-  //         waiters: []
-  //       }
+  it("should return object with warning color for wednesday , and danger color  for the rest of the week as well as ,names and count for each day of the week.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Joy', ['Monday', 'Tuesday', 'Wednesday']);
+    await waiter.addUser('Yugi', ['Monday']);
+    await waiter.addUser('Jube', ['Monday']);
+    await waiter.addUser('Taybah', ['Monday']);
+    await waiter.addUser('Naruto', ['Tuesday', 'Wednesday']);
+    const waiterCount = await waiter.countWaiters()
+    assert.deepStrictEqual(waiterCount,
+      [
+        {
+          color: 'bg-warning',
+          count: 4,
+          dayname: 'Monday',
+          id: 1,
+          waiters: [{ name: 'Joy' }, { name: 'Yugi' }, { name: 'Jube' }, { name: 'Taybah' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 2,
+          dayname: 'Tuesday',
+          id: 2,
+          waiters: [{ name: 'Joy' }, { name: 'Naruto' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 2,
+          dayname: 'Wednesday',
+          id: 3,
+          waiters: [{ name: 'Joy' }, { name: 'Naruto' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 0,
+          dayname: 'Thursday',
+          id: 4,
+          waiters: []
+        },
+        {
+          color: 'bg-danger',
+          count: 0,
+          dayname: 'Friday',
+          id: 5,
+          waiters: []
+        }
 
 
 
 
-  //     ]
+      ]
 
-  //   )
-
-
-  // })
-  // it("should return object with success color for Friday , and danger color  for the rest of the week as well as ,names and count for each day of the week.", async function () {
-  //   let waiter = Waiter(pool);
-  //   await waiter.addUser('Lucy', ['Wednesday', 'Friday']);
-  //   await waiter.addUser('Johnny', ['Monday', 'Friday']);
-  //   await waiter.addUser('Connor', ['Tuesday', 'Friday']);
-  //   const waiterCount = await waiter.countWaiters();
-  //   assert.deepStrictEqual(waiterCount,
-  //     [
-  //       {
-  //         color: 'bg-danger',
-  //         count: 1,
-  //         dayname: 'Monday',
-  //         id: 1,
-  //         waiters: [{ name: 'Johnny' }]
-  //       },
-  //       {
-  //         color: 'bg-danger',
-  //         count: 1,
-  //         dayname: 'Tuesday',
-  //         id: 2,
-  //         waiters: [{ name: 'Connor' }]
-  //       },
-  //       {
-  //         color: 'bg-danger',
-  //         count: 1,
-  //         dayname: 'Wednesday',
-  //         id: 3,
-  //         waiters: [{ name: 'Lucy' }]
-  //       },
-  //       {
-  //         color: 'bg-danger',
-  //         count: 0,
-  //         dayname: 'Thursday',
-  //         id: 4,
-  //         waiters: []
-  //       },
-  //       {
-  //         color: 'bg-success',
-  //         count: 3,
-  //         dayname: 'Friday',
-  //         id: 5,
-  //         waiters: [{ name: 'Lucy' }, { name: 'Johnny' }, { name: 'Connor' }]
-  //       }
+    )
 
 
+  })
+  it("should return object with success color for Friday , and danger color  for the rest of the week as well as ,names and count for each day of the week.", async function () {
+    let waiter = Waiter(pool);
+    await waiter.addUser('Lucy', ['Wednesday', 'Friday']);
+    await waiter.addUser('Johnny', ['Monday', 'Friday']);
+    await waiter.addUser('Connor', ['Tuesday', 'Friday']);
+    const waiterCount = await waiter.countWaiters();
+    assert.deepStrictEqual(waiterCount,
+      [
+        {
+          color: 'bg-danger',
+          count: 1,
+          dayname: 'Monday',
+          id: 1,
+          waiters: [{ name: 'Johnny' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 1,
+          dayname: 'Tuesday',
+          id: 2,
+          waiters: [{ name: 'Connor' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 1,
+          dayname: 'Wednesday',
+          id: 3,
+          waiters: [{ name: 'Lucy' }]
+        },
+        {
+          color: 'bg-danger',
+          count: 0,
+          dayname: 'Thursday',
+          id: 4,
+          waiters: []
+        },
+        {
+          color: 'bg-success',
+          count: 3,
+          dayname: 'Friday',
+          id: 5,
+          waiters: [{ name: 'Lucy' }, { name: 'Johnny' }, { name: 'Connor' }]
+        }
 
 
-  //     ]
-
-  //   )
 
 
-  // })
+      ]
+
+    )
+
+
+  })
 
   after(function () {
     pool.end();
