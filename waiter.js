@@ -40,18 +40,6 @@ module.exports = function WaiterFunc(pool) {
     where weekdays.id=$1` , [day])
         return waiterNames.rows;
     }
-
-    // async function dayNameList() {
-    //     const dayObjs = await pool.query('select * from weekdays');
-    //     const days = dayObjs.rows;
-    //     for (let i = 0; i < days.length; i++) {
-    //         const day = days[i];
-    //         const waiters = await waitersWorking(day.id)
-    //         // dayColor(waiters)
-    //         day.waiters = waiters
-    //     }
-    //     return days
-    // }
     async function countWaiters() {
         const dayObjs = await pool.query('select * from weekdays');
         const days = dayObjs.rows;
@@ -60,9 +48,6 @@ module.exports = function WaiterFunc(pool) {
             const waiters = await waitersWorking(day.id)
             day.waiters = waiters;
             day.count = waiters.length;
-            // var waiterCount
-            // var waiterCount = day.waiters.length
-            // console.log(waiterCount)
             if (day.count < 3) {
                 day.color = 'bg-danger'
             }

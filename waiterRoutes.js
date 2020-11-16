@@ -4,12 +4,10 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
     }
     async function getWaiter(req, res, next) {
-        // res.render("index")
         const user = req.params.username;
         const allDays = await waiterRoutes.checkedDays(user);
         const username = user.charAt(0).toUpperCase() + user.slice(1)
 
-        // console.log(user);
         res.render('employee',
             {
                 user: [{
