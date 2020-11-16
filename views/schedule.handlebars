@@ -13,89 +13,114 @@
 				<li class={{this.color}}>bread</li>
 				{{/each}} --}}
 	<div class="container">
-	<div class="row">
-		<div class="float-left pr-5">
-			<a href="/"><i class="fas fa-home fa-2x "></i></a>
-		</div>
-	</div>
-	
-{{!-- {{#each counter}}
+		<div class="row">
+			<div class="float-left pr-5">
+				<a href="/"><i class="fas fa-home fa-2x "></i></a>
+			</div>
+
+
+			{{!-- {{#each counter}}
 
 <p class= {{this.color}}> bread</p>
 
-{{/each}} --}}	
+{{/each}} --}}
+			<div class="col-3">
+				<table class=" d-flex justify-content-center table table-striped text-light">
+					<tr>
+						<th scope="col">Equal To 3</th>
+						<th scope="col">Less Than 3</th>
+						<th scope="col">More Than 3</th>
+					</tr>
+					<tr>
+						<td scope="col" class="bg-success"></td>
+						<td scope="col" class="bg-danger"></td>
+						<td scope="col" class="bg-warning"></td>
+					</tr>
+					{{!-- <tr>
+	<th>Less Than 3</th>
+	<td class='bg-danger'></td>
+</tr>
+<tr>
+	<th>Equal To 3</th>
+	<td class="bg-success"></td>
+</tr>
+<tr>
+	<th>Greater Than 3</th>
+	<td class='bg-warning'></td>
+</tr> --}}
+				</table>
+			</div>
+		</div>
+		<form action="/days" method="post">
+			<div class="row">
+				<table class=" table table-bordered text-light">
+					<thead>
 
+						<tr scope="col-3">
+							{{!-- {{#if}} --}}
 
-	<form action="/days" method="post">
-	<div class="row">
-	<table class=" table table-bordered text-light">
-		<thead>
+							{{#each days}}
 
-			<tr scope="col-3">
-				{{!-- {{#if}} --}}
-
-				{{#each days}}
-
-{{!-- 
+							{{!-- 
 {{#each counter}} --}}
 
-{{!-- {{#each waiterCount}} --}}
-				<th scope="col" class={{this.color}}> 
-	
-					{{this.dayname}}
+							{{!-- {{#each waiterCount}} --}}
+							<th scope="col" class={{this.color}}>
 
-				
-					{{/each}}
-				</th>
+								{{this.dayname}}
 
 
-			</tr>
+								{{/each}}
+							</th>
 
-		</thead>
-		<tbody>
-			<tr>
+
+						</tr>
+
+					</thead>
+					<tbody>
+						<tr>
+
+							{{#each days}}
+
+							<td scope="col">
+								{{#each waiters}}
+								<li>{{this.name}}</li>
+
+								{{/each}}
+
+							</td>
+
+							{{/each}}
+
+						</tr>
+
+					</tbody>
+
+				</table>
+			</div>
+
+			<div class="row">
+				<input type="text" name="waiter" class="" placeholder="Enter waiter" id="" class="">
 
 				{{#each days}}
-
-				<td scope="col">
-					{{#each waiters}}
-					<li>{{this.name}}</li>
-
-					{{/each}}
-
-				</td>
-
-				{{/each}}
-
-			</tr>
-
-		</tbody>
-
-	</table>
-	</div>
-
-<div class="row">
-<input type="text" name="waiter" class="" placeholder="Enter waiter" id="" class="">
-
- {{#each days}}
-                <label for="" class="pl-5 px-3 ">{{this.dayname}}</label><input type="checkbox" value="{{this.dayname}}"
-                {{this.checked}} name="daysAdmin"  class="checkbox">
+				<label for="" class="pl-5 px-3 ">{{this.dayname}}</label><input type="checkbox" value="{{this.dayname}}"
+					{{this.checked}} name="daysAdmin" class="checkbox">
 				{{/each}}
 
 
-</div>
-<div class=" d-flex justify-content-center">
-<input type="submit" value="Update waiter" class=" btn btn-light">
+			</div>
+			<div class="d-flex justify-content-center">
+				<input type="submit" value="Update waiter" class=" btn btn-light">
 
-</div>
- <div class='row'>
-            <p class="text-warning ">{{messages.inv}}</p>
-            <p class="duplicate">{{messages.dup}}</p>
-            <p class="text-success">{{messages.succ}}</p>
-        </div>
-	</form>
+			</div>
+			<div class='row'>
+				<p class="text-warning ">{{messages.inv}}</p>
+				<p class="duplicate">{{messages.dup}}</p>
+				<p class="text-success">{{messages.succ}}</p>
+			</div>
+		</form>
 
-	{{!-- <form action="/updateUser" method="post">
+		{{!-- <form action="/updateUser" method="post">
 	<div class="row p-4">
 	<div class="float-left"	>
 <input type="text" name="waiter" class="" placeholder="Enter waiter" id="" class="">
@@ -112,19 +137,19 @@
 </form> --}}
 
 
-	<div class='row p-4'>
-		<form action="/reset" method="get">
-<input type="submit" value="Reset" class="btn btn-light">
-</div>
-</form>
-</div>
-<script>
-        setTimeout(function () {
-       document.querySelector(".text-warning").innerHTML = "";
-            document.querySelector(".duplicate").innerHTML = "";
-            document.querySelector(".text-success").innerHTML = "";
-        }, 5000);
-    </script>
+		<div class='row p-4'>
+			<form action="/reset" method="get">
+				<input type="submit" value="Reset" class="btn btn-light">
+		</div>
+		</form>
+	</div>
+	<script>
+		setTimeout(function () {
+			document.querySelector(".text-warning").innerHTML = "";
+			document.querySelector(".duplicate").innerHTML = "";
+			document.querySelector(".text-success").innerHTML = "";
+		}, 5000);
+	</script>
 </body>
 
 </html>

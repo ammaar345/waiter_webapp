@@ -38,11 +38,6 @@ module.exports = function WaiterRoutes(waiterRoutes) {
             return 
         }
         const allDays = await waiterRoutes.checkedDays(username)
-
-        // console.log(username)
-        // else 
-        // req.flash('inv','PP')
-
         res.render('employee',
             {
                 user: [{
@@ -57,18 +52,10 @@ module.exports = function WaiterRoutes(waiterRoutes) {
 
 
     async function admin(req, res, next) {
-        const days =await waiterRoutes.countWaiters() //await waiterRoutes.dayNameList();
+        const days =await waiterRoutes.countWaiters()
         res.render('schedule',
             {
-                days,
-            
-                // waiterCount:[{
-                //     'color' :countColor
-                // }]
-                // days: [{
-                //     'color':
-                //         count
-                // }]
+                days
             }
         )
 
@@ -82,6 +69,10 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         if (weekday === undefined && username !== '') {
             req.flash('inv', 'Please select days to work.')
         }
+        else if (username === "" && weekday === undefined) {
+            req.flash('inv', 'Please enter your name and select the days that you wish to work.')
+            // return 
+        }
         else if (username !== '' && weekday !== undefined) {
 
             await waiterRoutes.countWaiters()
@@ -90,10 +81,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
           
             req.flash('succ', 'Shifts successfully updated.')
         }
-        else if (username === "" && weekday === undefined) {
-            req.flash('inv', 'Please enter your name and select days to work.')
-            return 
-        }
+       
         const days =await waiterRoutes.countWaiters()
         res.render('schedule',{
 days
