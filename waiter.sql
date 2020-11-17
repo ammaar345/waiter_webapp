@@ -1,4 +1,4 @@
-drop table if EXISTS tblshift,waiters,weekdays;
+drop table if EXISTS shifts,waiters,weekdays;
 create table waiters
 (
     id serial not null primary key,
@@ -9,7 +9,7 @@ create table weekdays
     id serial not null primary key,
     dayname text not null
 );
-create table tblshift
+create table shifts
 (
     id serial not null primary key,
     waiternameid int not null,

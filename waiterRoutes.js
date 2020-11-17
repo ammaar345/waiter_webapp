@@ -1,6 +1,6 @@
 module.exports = function WaiterRoutes(waiterRoutes) {
     function home(req, res, next) {
-        res.render('index');
+        res.redirect('/waiters/');
 
     }
     async function getWaiter(req, res, next) {
@@ -18,7 +18,8 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         )
     }
     async function userCreate(req, res, next) {
-        const username = req.params.username;
+        const user = req.params.username;
+        const username=user.charAt(0).toUpperCase() + user.slice(1);
         const weekday = req.body.chkDays;
         if (weekday === undefined && username !== '') {
             req.flash('inv', 'Please select days to work.')
@@ -90,12 +91,12 @@ days
     async function waiterHome(req, res) {
 const allDays=await waiterRoutes.getAllDays()
         res.render('employee', {
-weekday:allDays
+// weekday:allDays
         })
     }
 async function reset (req,res){
    await waiterRoutes.clearDataBase()
-    res.render  ('index',{
+    res.render  ('employee',{
 
     })
 }

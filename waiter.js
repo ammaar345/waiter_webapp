@@ -4,7 +4,7 @@ module.exports = function WaiterFunc(pool) {
 
         let waiter = await pool.query(SELECT_QUERY, [user])
         const INSERT_QUERY = 'INSERT into waiters (name)values ($1) '
-        const DELETE_QUERY = 'delete from tblshift where waiternameid=$1'
+        const DELETE_QUERY = 'delete from shifts where waiternameid=$1'
         if (waiter.rows.length === 0) {
 
             await pool.query(INSERT_QUERY, [user])
@@ -13,18 +13,18 @@ module.exports = function WaiterFunc(pool) {
         await pool.query(DELETE_QUERY, [waiter.rows[0].id])
 
         for (const day of week) {
-            const INSERT_QUERY2 = 'insert into tblshift (weekdayid,waiternameid) values ($1,$2)'
+            const INSERT_QUERY2 = 'insert into shifts (weekdayid,waiternameid) values ($1,$2)'
             const weekdayID = await pool.query('SELECT id from weekdays where dayname=($1)', [day]);
             await pool.query(INSERT_QUERY2, [weekdayID.rows[0].id, waiter.rows[0].id])
         }
 
     }
     async function daysNames() {
-        const dayNames = await pool.query('SELECT waiternameid,weekdayid from tblshift')
+        const dayNames = await pool.query('SELECT waiternameid,weekdayid from shifts')
         return dayNames.rows
     }
     async function clearDataBase() {
-        const clearDb = 'DELETE FROM tblshift';
+        const clearDb = 'DELETE FROM shifts';
         const DELETE_QUERY = 'DELETE FROM waiters ';
         await pool.query(clearDb);
         await pool.query(DELETE_QUERY);
@@ -33,10 +33,10 @@ module.exports = function WaiterFunc(pool) {
     async function waitersWorking(day) {
         const waiterNames = await pool.query(`SELECT  waiters.name AS name
     FROM waiters
-    LEFT JOIN tblshift
-    ON waiters.id=tblshift.waiternameid
+    LEFT JOIN shifts
+    ON waiters.id=shifts.waiternameid
     LEFT JOIN weekdays
-    ON weekdays.id=tblshift.weekdayid
+    ON weekdays.id=shifts.weekdayid
     where weekdays.id=$1` , [day])
         return waiterNames.rows;
     }
@@ -72,10 +72,10 @@ module.exports = function WaiterFunc(pool) {
         const allWaiters = await pool.query('Select name from waiters');
         var waitersWorkingDays = await pool.query(`  SELECT  weekdays.dayname AS Weekday
         FROM weekdays
-        LEFT JOIN tblshift
-        ON weekdays.id= tblshift.weekdayid 
+        LEFT JOIN shifts
+        ON weekdays.id= shifts.weekdayid 
         left join waiters
-        on waiters.id=tblshift.waiternameid
+        on waiters.id=shifts.waiternameid
         where waiters.name=$1
         
         `, [waiter]);

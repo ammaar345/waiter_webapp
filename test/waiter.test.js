@@ -8,14 +8,14 @@ const pool = new Pool({
   connectionString
 });
 beforeEach(async function () {
-  await pool.query('drop table if EXISTS tblshift,waiters');
+  await pool.query('drop table if EXISTS shifts,waiters');
   await pool.query(`create table waiters
      (id serial not null primary key,
          name text not null
       )`)
 
 
-  await pool.query(`create table tblshift
+  await pool.query(`create table shifts
     (
         id serial not null primary key,
         waiternameid int not null,
