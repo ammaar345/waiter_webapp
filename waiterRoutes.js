@@ -97,8 +97,10 @@ const allDays=await waiterRoutes.getAllDays()
     }
 async function reset (req,res){
    await waiterRoutes.clearDataBase()
-    res.render  ('employee',{
-
+   const days =await waiterRoutes.countWaiters()
+   req.flash('clear','Shifts Have successfully been cleared for the week.')
+    res.render  ('schedule',{
+days
     })
 }
     return {

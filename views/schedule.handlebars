@@ -94,11 +94,12 @@
 			<div class='row '>
 				<p class="text-warning p-2 ">{{messages.inv}}</p>
 				<p class="text-success p-2">{{messages.succ}}</p>
+				<p class='text-primary p-2'>{{messages.clear}}</p>
 			</div>
 		</form>
 		<div class='row p-2'>
-			<form action="/reset" method="get">
-			
+			<form action="/reset" method="POST" {{!--method="get"--}}>
+			{{!--  --}}
 				<input type="submit" value="Reset" class="btn btn-light">
 				
 		</div>
@@ -108,7 +109,8 @@
 		setTimeout(function () {
 			document.querySelector(".text-warning").innerHTML = "";
 			document.querySelector(".text-success").innerHTML = "";
-		}, 5000);
+			document.querySelector(".text-primary").innerHTML = "";
+		}, 4000);
 	</script>
 </body>
 
