@@ -20,7 +20,7 @@ module.exports = function WaiterRoutes(waiterRoutes) {
     }
     async function userCreate(req, res, next) {
         const user = req.params.username;
-        const username=user.charAt(0).toUpperCase() + user.slice(1);
+        const username=user.charAt(0).toUpperCase() + user.slice(1);                                                                                                                                            
         let weekday = Array.isArray(req.body.chkDays) ? req.body.chkDays : [req.body.chkDays];
         if (weekday === undefined && username !== '') {
             req.flash('inv', 'Please select days to work.')
