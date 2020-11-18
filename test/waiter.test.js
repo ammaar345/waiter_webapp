@@ -312,7 +312,6 @@ describe("Should test the functions in Waiters that are returning values", funct
 
 
   })
-
   after(function () {
     pool.end();
   })
