@@ -77,7 +77,9 @@ module.exports = function WaiterRoutes(waiterRoutes) {
         else if (weekday[1] === undefined) {
             req.flash('inv', 'Please select days to work.')
         }
-      
+      else if (weekday[1]===undefined && username===''){
+req.flash('inv','Please  enter your name and select the days you wish to work.')
+      }
         else if (username !== '' && weekday !== undefined) {
 
             await waiterRoutes.countWaiters()
