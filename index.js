@@ -40,12 +40,10 @@ app.get('/', waiterRoutes.home)
 app.get('/waiters/', waiterRoutes.waiterHome)
 app.post("/waiters/:username", waiterRoutes.userCreate)
 app.get("/waiters/:username", waiterRoutes.getWaiter)
-
-// app.post("/updateUser",waiterRoutes.adminUpdate);
 app.post('/days',waiterRoutes.adminUpdate)
 app.get("/days", waiterRoutes.admin);
-// app.get('/updateUser',waiterRoutes.adminReq);
-app.get('/reset',waiterRoutes.reset)
+// app.get('/reset',waiterRoutes.reset)
+app.post('/reset',waiterRoutes.reset)
 const PORT = process.env.PORT || 2009;
 app.listen(PORT, function () {
   console.log("App started at port :", PORT);
