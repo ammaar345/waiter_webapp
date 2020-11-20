@@ -1,6 +1,5 @@
 const assert = require("assert");
 const Waiter = require("../waiter");
-
 const pg = require("pg");
 const Pool = pg.Pool;
 const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/waiters';
@@ -24,7 +23,7 @@ beforeEach(async function () {
         FOREIGN key (weekdayid) REFERENCES weekdays(id)
     )`)
 })
-describe("Should test the functions in Waiters that are returning values", function () {
+describe("Should test the functions in Waiters that are returning values", async function () {
   it("Should add the day ID of Monday , Tuesday and Wednesday as well as the waiter ID into the database.", async function () {
     let waiter = Waiter(pool);
     await waiter.addUser('Ammaar', ['Monday', 'Tuesday', 'Wednesday']);
