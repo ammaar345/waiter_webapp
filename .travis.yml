@@ -1,5 +1,3 @@
-require 'coveralls'
-Coveralls.wear!
 repo_token: bwkwfK7TT6jOX9bmH7UPebv2WHCtwdyHv
 language: node_js
 node_js:
