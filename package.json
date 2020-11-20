@@ -27,9 +27,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "mocha",
-    "coveralls":"istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage" 
-  },
+    "test": "jest",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ammaar345/waiter_webapp.git"

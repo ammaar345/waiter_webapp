@@ -311,10 +311,10 @@ describe("Should test the functions in Waiters that are returning values", async
 
 
   })
-  after(function () {
-    pool.end();
-  })
 
+})
+after(function () {
+  pool.end();
 })
 
 
