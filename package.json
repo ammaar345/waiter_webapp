@@ -26,7 +26,6 @@
   "scripts": {
     "start": "node index.js",
     "test": "nyc --reporter=html --reporter=text mocha"
-
   },
   "repository": {
     "type": "git",
