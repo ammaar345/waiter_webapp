@@ -6,7 +6,5 @@ env:
 before_script:
   - psql -c 'create database  waiters;' -U postgres
   - psql -U postgres -d waiters -a -f waiter.sql
-  script:
-  - npm run coveralls
 services:
   - postgresql
