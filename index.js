@@ -6,10 +6,6 @@ const app = express();
 
 
 
-
-const greet = Greet(client);
-
-client.connect(); 
 //
 const flash = require('express-flash');
 const session = require('express-session');
@@ -27,6 +23,7 @@ const client = new Client({
     rejectUnauthorized: false
   }
 });
+client.connect(); 
 const Waiter = require("./waiter");
 const WaiterRoutes = require('./waiterRoutes');
 const waiter = Waiter(client);
