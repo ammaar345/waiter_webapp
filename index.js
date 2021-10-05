@@ -4,21 +4,32 @@ const bodyParser = require("body-parser")
 const app = express();
 //
 
+
+
+
+const greet = Greet(client);
+
+client.connect(); 
 //
 const flash = require('express-flash');
 const session = require('express-session');
-const pg = require("pg");
-const Pool = pg.Pool;
+// const pg = require("pg");
+// const Pool = pg.Pool;
 
 const connectionString = process.env.DATABASE_URL || 'postgresql://sneakygoblin:codex123@localhost:5432/waiters';
 
-const pool = new Pool({
-  connectionString
-});
 
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 const Waiter = require("./waiter");
 const WaiterRoutes = require('./waiterRoutes');
-const waiter = Waiter(pool);
+const waiter = Waiter(client);
 const waiterRoutes = WaiterRoutes(waiter);
 
 
